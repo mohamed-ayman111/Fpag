@@ -1,0 +1,25 @@
+* {
+    margin:0;
+    padding:0;
+}
+body{
+    margin=0;
+    padding;
+}
+.photo {
+    width:200px;
+    height:atuo;
+    border-radius:70px;
+    padding:10px;
+    border:2px #fff solid;
+    margin:20px
+}
+.header{
+    background:#8b4513;
+    display:flex;
+    justify-content:space-between;
+    paddin
+}
+.head {
+    justify-content:space-between;
+}
