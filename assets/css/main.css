@@ -7,19 +7,28 @@ body{
     padding;
 }
 .photo {
-    width:200px;
+    width:100px;
     height:atuo;
-    border-radius:70px;
+    border-radius:60px;
     padding:10px;
     border:2px #fff solid;
     margin:20px
 }
-.header{
+.header  {
     background:#8b4513;
     display:flex;
     justify-content:space-between;
-    paddin
+    padding:10px 50px;
+    align-items:center;
 }
-.head {
-    justify-content:space-between;
+.header a {
+    padding:0 30px;
+    color:
+    align-items:
+    center;
+    text-decoration:none;
+    border-radius:15px;
+}
+.header a:hover{
+    background:#fff
 }
