@@ -6,7 +6,7 @@
 }
 body{
     height:100vh;
-    background:linear-gradient(120deg,#1e1e2f,#fff);
+    background:linear-gradient(120deg,#6767a1,#d1caca,#00bfff);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -25,18 +25,18 @@ body{
 }
 .subtitle{
     text-align:center;
-    font-size:14px;
-    color:#ccc;
+    font-size:18px;
+    color:#000;
     margin-bottom:25px;
 }
 .input-group{
     margin-bottom:15px;
 }
 .input-group label{
-    display:block:
     font-size:13px;
+    color:;
     margin-bottom:5px;
-    color:#bbb;
+    text-align:center;
 }
 .input-group input{
     width:100%;
@@ -45,7 +45,7 @@ body{
     outline:none;
 }
 button{
-    width:50%;
+    width:100%;
     padding:12px;
     background:#4fc3f7;
     border:none;

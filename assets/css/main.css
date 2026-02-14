@@ -3,10 +3,16 @@
     padding:0;
 }
 body{
-    margin=0;
+    margin:0;
     padding;
 }
-.photo {
+.sn-pro-<uniquifier> {
+  font-family: "SN Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+.header img {
     width:200px;
     height:atuo;
     border-radius:70px;
@@ -18,8 +24,27 @@ body{
     background:#8b4513;
     display:flex;
     justify-content:space-between;
-    paddin
+    padding:0px 70px;
+    align-items:center;
 }
-.head {
-    justify-content:space-between;
+.head a{
+    margin:0 40px;
+    text-decoration:none;
+    color:#fff;
+    padding:15px;
+    border-radius:30px
+}
+.head a:hover{
+    background:#d0671c;
+}
+.btn {
+    padding:10px 50px;
+    background:#ffbf00;
+    margin-left:20px;
+    border-radius:20px;
+    color:#ffffff;
+    border:none;
+}
+.btn:hover{
+    background:#ffd862;
 }
