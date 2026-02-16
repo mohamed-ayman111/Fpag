@@ -6,21 +6,15 @@ body{
     margin:0;
     padding;
 }
-.sn-pro-<uniquifier> {
-  font-family: "SN Pro", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-}
-.header img {
-    width:200px;
+.photo {
+    width:100px;
     height:atuo;
-    border-radius:70px;
+    border-radius:60px;
     padding:10px;
     border:2px #fff solid;
     margin:20px
 }
-.header{
+.header  {
     background:#8b4513;
     display:flex;
     justify-content:space-between;
@@ -47,4 +41,6 @@ body{
 }
 .btn:hover{
     background:#ffd862;
+    padding:10px 50px;
+    align-items:center;
 }
