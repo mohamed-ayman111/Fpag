@@ -26,6 +26,13 @@ body{
     padding:0px 70px;
     align-items:center;
 }
+.header-font{
+    color:#ffffff;
+    font-family: "Playwrite NZ Basic", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
 .btn {
     padding:10px 15px;
     background:#ffbf00;
@@ -54,4 +61,29 @@ body{
     border:none;
     padding:5px 15px;
     border-radius:20px;
+}
+.landing-pag {
+    display:flex;
+    background:#8b4513;
+    justify-content:space-between;
+    padding:0px 70px;
+    align-items:center;
+    border-radius:0 0 50px 50px;
+}
+.landing-pag-text{
+    width: 700px;
+    color:#ffffff;
+}
+.landing-pag-text span{
+    padding:10px 60px;
+} 
+.landing-pag-search input{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    outline:none;
+}
+.landing-pag-photo{
+    h
+    width;
 }
