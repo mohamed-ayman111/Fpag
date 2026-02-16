@@ -66,24 +66,56 @@ body{
     display:flex;
     background:#8b4513;
     justify-content:space-between;
-    padding:0px 70px;
+    padding:70px 70px;
     align-items:center;
     border-radius:0 0 50px 50px;
 }
 .landing-pag-text{
-    width: 700px;
-    color:#ffffff;
+    width: 600px;
+    color:#ffffff;;
 }
 .landing-pag-text span{
     padding:10px 60px;
-} 
+}
+.landing-pag-text p {
+    padding:40px 0 20px 0;
+}
 .landing-pag-search input{
-    padding:10px 20px;
+    height:40px;
+    padding:0 20px;
     border:none;
     border-radius:20px;
     outline:none;
 }
-.landing-pag-photo{
-    h
-    width;
+.landing-pag-search{
+    margin:40px 0;
+}
+.landing-pag-search button{
+    position:absolute;
+    left:230px;
+    height:40px;
+}
+.landing-pag-photo img{
+    border-radius:5px 50px;
+    width:300px;
+    height:auto;
+}
+.tranding-pag{
+    padding:0px 70px;
+    color:slateblue;
+}
+.tranding-pag-inside{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 0;
+}
+.cards{
+padding:70px 70px;    
+}
+.card img{
+    width:200px;
+    height:auto;    
+}
+.card-info{
+    display:flex;
 }
