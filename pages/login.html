@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <script type="text/javascript">
+            function dataform(){
+                var username=document.forms["login-form"]["username"].value;
+                var email=document.forms["login-form"]["email"].value
+                var password=document.forms["login-form"]["password"]
+            }
+        </script>
         <meta charset="uft-8">
         <title>Login</title>
         <link rel="stylesheet" href="../assets/css/style.css">
@@ -8,8 +15,8 @@
         <body>
             <div class="login-box">
                 <h1>Login-box</h1>
-                <p class="subtitle">Welcome back, pleace sign in</p>
-                <form>
+                <p>Welcome back, pleace sign in</p>
+                <form name="login-form">
                     <!-- From Uiverse.io by liyaxu123 --> 
                      <div class="form-control">
                         <input type="value" required="">

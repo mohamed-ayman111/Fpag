@@ -1,23 +1,48 @@
 <!DOCTYPE HTML>
 <HTML>
     <HEAD>
+        <script type="text/javascript">
+            function dataform(){
+                var username=document.forms["registration"]["username"].value;
+                var email=document.forms["registration"]["email"].value;
+                var password=document.forms["registration"]["password"].value;
+                var re= /\S+@\S+\.\S/
+                if(username==""||email==""||password==""){
+                    alert("All field shod be full");
+                    return false;
+                }
+                if (!re.test(email)){
+                    alert("Wrote correct email syntax");
+                    return false;
+                }
+                if (password.length < 6){
+                    alert("Password shuod be more than 6 char");
+                    return false;
+                }
+                alert("Registartion done successfly");
+            }
+        </script>
         <link rel="stylesheet" href="../assets/css/regist.css">
         <title>Register</title>
     </HEAD>
     <body>
         <div class="regist-box">
         <h1>Sign-up</h1>
-        <p class="sub">Welcome<br>Pleace enter your username or email and put strong passwod to creating you strong accout.</p>
-        <form>    
-            <div class="the-box">
+        <p>Welcome back<br>Pleace enter username/email and password to creating you accout.</p>
+        <form name="registration" onsubmit="return dataform()">    
+            <div class="input-box">
                     <label>Accout name</label>
-                    <input type="text-email" placeholder="username / email">
+                    <input type="text" name="username" placeholder="username">
                 </div>
-                <div class="the-box">
+                <div>
+                    <label>Gmail</label>
+                    <input type="text-gmail" name="email" placeholder="Gmail">
+                </div>
+                <div class="input-box">
                     <label>Password</label>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                 </div>
-            </form>
             <button type="submit">Register</button>
+            </form>
         </div>
 </body>
