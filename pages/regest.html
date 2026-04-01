@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <HTML>
-    <HEAD>
+    <head>
         <script type="text/javascript">
             function dataform(){
                 var username=document.forms["registration"]["username"].value;
@@ -24,7 +24,7 @@
         </script>
         <link rel="stylesheet" href="../assets/css/regist.css">
         <title>Register</title>
-    </HEAD>
+    </head>
     <body>
         <div class="regist-box">
         <h1>Sign-up</h1>
@@ -34,9 +34,13 @@
                     <label>Accout name</label>
                     <input type="text" name="username" placeholder="username">
                 </div>
-                <div>
+                <div class="input-box">
                     <label>Gmail</label>
                     <input type="text-gmail" name="email" placeholder="Gmail">
+                </div>
+                <div class="input-box">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password">
                 </div>
                 <div class="input-box">
                     <label>Password</label>
@@ -46,3 +50,4 @@
             </form>
         </div>
 </body>
+</HTML>

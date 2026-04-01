@@ -14,7 +14,8 @@ body{
 }
 .login-box{
     width:350px;
-    background:rgab(0,0,0,0.45);
+    background:#2c2c;
+    ackgroud:rgab(0,0,0,0.45);
     padding:30px;
     border-radius:10px;
     box-shadow:0 10px 30px rgab(0,0,0,0.4);

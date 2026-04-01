@@ -12,12 +12,20 @@ body {
     align-items:center;
 }
 .regist-box{
+    width:350px;
+    height: auto;
+    background:#2c2c;
+    ackgroud:rgab(0,0,0,0.45);
     padding:30px;
-    width:400px;
-    border-radius:8px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgab(0,0,0,0.4);
+    position:relative;
 }
-.regist-box h1{
-    text-algin:center;
-    margin-booton:10;
-
+.regist-box h1 {
+    text-align:center;
+    margin-bottom:10px;
+}
+.regist-box p{
+    text-align: center;
+    font-size: 18px;
 }
