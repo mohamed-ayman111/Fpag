@@ -111,7 +111,7 @@ body{
 }
 .cards{
     display:flex;
-    padding:70px 70px;
+    padding:30px 30px;
     justify-content:space-between;
 }
 /* .like-btn {
