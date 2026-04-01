@@ -16,6 +16,9 @@
   margin: 20px 0 40px;
   width: 190px;
 }
+.card-info img{
+  width:70px;
+}
 
 .form-control input {
   background-color: transparent;
