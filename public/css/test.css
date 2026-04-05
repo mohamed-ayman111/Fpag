@@ -1,59 +1,44 @@
-.body{  
-  background-color:#2727ff;
-  /*font-family: "Playwrite NZ Basic", cursive;*/
+body{
+  margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.body h1{
-  color:#fff; 
-   font-family: "Playwrite NZ Basic", cursive;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
+.box {
+  background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+} 
+.box h1{
+   text-align: center;
+    margin-bottom: 20px;
 }
-/* From Uiverse.io by liyaxu123 */ 
-.form-control {
-  background-colo;
-  position: relative;
-  margin: 20px 0 40px;
-  width: 190px;
-}
-.card-info img{
-  width:70px;
-}
+.box input{
+      width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
 
-.form-control input {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 2px #fff solid;
-  display: block;
-  width: 100%;
-  padding: 15px 0;
-  font-size: 18px;
-  color: #fff;
 }
-
-.form-control input:focus,
-.form-control input:valid {
-  outline: 0;
-  border-bottom-color: lightblue;
+input:focus {
+    border-color: #667eea;
+    outline: none;
 }
-
-.form-control label {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  pointer-events: none;
+button {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
-
-.form-control label span {
-  display: inline-block;
-  font-size: 18px;
-  min-width: 5px;
-  color: #fff;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.form-control input:focus+label span,
-.form-control input:valid+label span {
-  color: lightblue;
-  transform: translateY(-30px);
+button:hover {
+    background: #5a67d8;
 }

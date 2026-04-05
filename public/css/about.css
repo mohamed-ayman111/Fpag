@@ -40,15 +40,16 @@
     color:#ffffff;
     border:none;
 }
+.btn:hover{
+    background:#ffd862;
+}
+
 .head a {
-    padding:5px 20px;
+    padding:10px 15px;
     color:#fff;
     align-items:center;
     text-decoration:none;
-    border-radius:15px;
-}
-.btn:hover{
-    background:#ffd862;
+    border-radius:20px;
 }
 .head a:hover{
     background:#b85b19;
