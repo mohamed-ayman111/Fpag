@@ -1,25 +1,41 @@
 <!DOCTYPE HTML>
 <HTML>
     <head>
-        <script type="text/javascript">
+        <script>
             function dataform(){
-                var username=document.forms["registration"]["username"].value;
-                var email=document.forms["registration"]["email"].value;
-                var password=document.forms["registration"]["password"].value;
-                var re= /\S+@\S+\.\S/
-                if(username==""||email==""||password==""){
-                    alert("All field shod be full");
+                var form = document.forms["registration"];  
+                var username = form["username"].value.trim();
+                var email = form["email"].value.trim();
+                var password = form["password"].value.trim();
+                var confirmpassword = form["confirmpassword"].value.trim();
+                var emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                var passwordpattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/; 
+               //Check input fields required.
+                if(!username||!email||!password||!confirmpassword){
+                    alert("All field are required");
                     return false;
                 }
-                if (!re.test(email)){
-                    alert("Wrote correct email syntax");
+                //Check username lenght.
+                if (username.length < 3){
+                    alert("Username must be at least 3 characters.");
                     return false;
                 }
-                if (password.length < 6){
-                    alert("Password shuod be more than 6 char");
+                //Check email.
+                if (!emailpattern.test(email)){
+                    alert("Invalid email format.");
+                    return false;
+                }
+                //Check password.
+                if (!passwordpattern.test(password)){
+                    alert("Passwod must contain uppercase, lowercase ,number ,and be 8+ chars");
+                    return false;
+                }
+                if (password != confirmpassword){
+                    alert("Password do not match.");
                     return false;
                 }
                 alert("Registartion done successfly");
+                return true;
             }
         </script>
         <link rel="stylesheet" href="/css/register.css">
@@ -28,27 +44,27 @@
     <body>
         <div class="regist-box">
         <h1>Sign-up</h1>
-        <form name="registration" onsubmit="return dataform()">    
+        <form action="/register" method="POST" name="registration" novalidate onsubmit="return dataform()">
             <div class="form-control">
-                        <input type="value" required="">
+                        <input type="text" name="username" required="">
                         <label>
                            <span style="transition-delay:0ms">U</span><span style="transition-delay:50ms">s</span><span style="transition-delay:100ms">e</span><span style="transition-delay:150ms">r</span><span style="transition-delay:200ms">n</span><span style="transition-delay:250ms">a</span><span style="transition-delay:300ms">m</span><span style="transition-delay:350ms">e</span>
                         </label>
                     </div>
                 <div class="form-control">
-                        <input type="gmail" required="">
+                        <input type="email" name="email" required="">
                         <label>
                             <span style="transition-delay:0ms">G</span><span style="transition-delay:50ms">m</span><span style="transition-delay:100ms">a</span><span style="transition-delay:150ms">i</span><span style="transition-delay:200ms">l</span>           
                         </label>
                     </div>
                 <div class="form-control">
-                        <input type="password" required="">
+                        <input type="password" name="password" required="">
                         <label>
                             <span style="transition-delay:0ms">P</span><span style="transition-delay:50ms">a</span><span style="transition-delay:100ms">s</span><span style="transition-delay:150ms">s</span><span style="transition-delay:200ms">w</span><span style="transition-delay:250ms">o</span><span style="transition-delay:300ms">r</span><span style="transition-delay:350ms">d</span>
                         </label>
                     </div>
                 <div class="form-control">
-                        <input type="password" required="">
+                        <input type="password" name="confirmpassword" required="">
                         <label>
                             <span style="transition-delay:0ms">C</span><span style="transition-delay:50ms">o</span><span style="transition-delay:100ms">n</span><span style="transition-delay:150ms">f</span><span style="transition-delay:200ms">e</span><span style="transition-delay:250ms">r</span><span style="transition-delay:300ms">m</span><span style="transition-delay:350ms">P</span><span style="transition-delay:400ms">a</span><span style="transition-delay:450ms">s</span><span style="transition-delay:500ms">s</span><span style="transition-delay:550ms">w</span><span style="transition-delay:600ms">o</span><span style="transition-delay:650ms">r</span><span style="transition-delay:700ms">d</span>                            
                         </label>

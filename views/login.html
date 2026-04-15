@@ -1,11 +1,15 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <script type="text/javascript">
+        <script>
             function dataform(){
-                var username=document.forms["login-form"]["username"].value;
-                var email=document.forms["login-form"]["email"].value
-                var password=document.forms["login-form"]["password"].value;
+                form = document.forms["loginbox"];
+                var username = form.["username"].value.trim();
+                var password = form.["password"].value.trim();
+                var passwordpattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+                 if ( passwordpattern.test(password) ){
+                    return alert("");
+                 }
             }
         </script>
         <meta charset="uft-8">
@@ -15,17 +19,17 @@
         <body>
             <div class="login-box">
                 <h1>Login</h1>
-                <form name="login-form">
+                <form action="/login" method="POST" name="loginbox" novalidate onsubmit>
                     <!-- From Uiverse.io by liyaxu123 --> 
                      <div class="form-control">
-                        <input type="value" required="">
+                        <input type="text" name="username" required="">
                         <label>
                             <span style="transition-delay:0ms">U</span><span style="transition-delay:50ms">s</span><span style="transition-delay:100ms">e</span><span style="transition-delay:150ms">r</span><span style="transition-delay:200ms">n</span><span style="transition-delay:250ms">a</span><span style="transition-delay:300ms">m</span><span style="transition-delay:350ms">e</span>
                         </label>
                     </div>
                     <!-- From Uiverse.io by liyaxu123 --> 
                      <div class="form-control">
-                        <input type="password" required="">
+                        <input type="password" name="password" required="">
                         <label>
                             <span style="transition-delay:0ms">P</span><span style="transition-delay:50ms">a</span><span style="transition-delay:100ms">s</span><span style="transition-delay:150ms">s</span><span style="transition-delay:200ms">w</span><span style="transition-delay:250ms">o</span><span style="transition-delay:300ms">r</span><span style="transition-delay:350ms">d</span>
                         </label>
@@ -37,6 +41,7 @@
 
                 <div class="footer-text">
                     <p>Create account <a href="/register">Sing up.</a></p>
+                             <a href="/respass"><p>Forgot password?</p></a>
             </div>
         </body>
         </html>                                

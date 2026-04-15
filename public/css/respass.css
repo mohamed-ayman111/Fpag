@@ -4,5 +4,58 @@ body{
     justify-content: center; /* أفقي */
     align-items: center;     /* عمودي */
     height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
-.rest 
+.rest{
+    width:400px;
+    padding:40px;
+}
+p {
+    margin:30px 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+h2{
+    ;
+}
+button{
+    padding:12px 0;
+    margin:30px 0;
+    width:100%;
+    background:green;
+    color:#ffffff;
+    border-radius:5px;
+    border:none;
+    //font-weight:bold;
+}
+button:hover{
+    background:#006c00;
+}
+
+.photo {
+    width:70px;
+    height:atuo;
+    border-radius:60px;
+    padding:0px;
+    border:1px #000 solid;
+    margin:10px
+}
+
+.field{
+    position:relative;
+}
+.field input{
+    border-radius:5px;
+    padding: 10px;
+    margin:30px 0;
+    border: 1px solid #ddd;
+    width:100%;   
+}
+input:focus{
+    border-color:#667eea;
+    outline:none;
+}
+label{
+    position:absolute;
+    left:0;
+    bottom: 80px;
+}

@@ -1,20 +1,45 @@
 <!doctype html>
 <html>
     <head>
+        <script>
+            function dataform(){
+                var form = document.forms["respass"];
+                var email = form["email"].value.trim();
+                var emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!email){
+                    alert("Email is required.");
+                    return false;
+                } 
+                if (!emailpattern.test(email)){
+                    alert("Invaild email.");
+                    return false;
+                }
+                alert("Done");
+                return true;
+            }
+            </script>
         <title>
             Reseting
             </title>
-            <link rel="stylesheet" href="../public/css/respass.css">
+            <link rel="stylesheet" href="/css/respass.css">
         </head>
         <body>
             <div class="rest">
+                <img src="/images/logo.jpg" class="photo">
             <h2>Reset your password</h2>
             <p>
 Enter your user account's verified email address and we will send you a password reset link.
 
 </p>
+<form action="/respass" method="POST" name="respass" novalidate onsubmit="return dataform()">
+<div class="field">
 <label for="email">Email</label>
-<input type="email">
+<input type="email" name="email" placeholder="Enter your email address">
+</div>
+<h2>Verify your account</h2>
+<button type="submit">Send password reset email</button>
+    </form>
 </div>
             </body>
         </html>
