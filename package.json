@@ -21,6 +21,7 @@
   "homepage": "https://github.com/mohamed-ayman111/Fpag#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+<<<<<<< HEAD
     "connect-mongo": "^6.0.0",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
@@ -28,5 +29,12 @@
     "express-session": "^1.19.0",
     "helmet": "^8.1.0",
     "mongoose": "^9.4.1"
+=======
+    "crypto": "^1.0.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.8.1",
+    "nodemailer": "^9.0.3"
+>>>>>>> cf690743ca912661ef8f1852a78ed0294103e6ef
   }
 }

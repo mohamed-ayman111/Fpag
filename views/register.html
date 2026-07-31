@@ -11,7 +11,7 @@
                 var emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 var passwordpattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/; 
                //Check input fields required.
-                if(!username||!email||!password||!confirmpassword){
+                if(!username||username == ""||!email||email == "" || !password||password == "" ||!confirmpassword||confirmpassword == "" ){
                     alert("All field are required");
                     return false;
                 }
