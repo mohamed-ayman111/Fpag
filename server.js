@@ -54,15 +54,24 @@ function sendpage(req,res,next,filename) {
 });*/
 app.get('/', (req,res,next) => sendpage(req,res,next,'main.html'));
 app.get('/about',(req,res,next) => sendpage(req,res,next,'about.html'));
-app.get('/login',(req,res,next) =>sendpage(req,res,next,'login.html'));
+app.get('/login',(req,res,next) =>{ console.log("LOGIN ROUTE WORKING");sendpage(req,res,next,'login.html')});
 app.get('/register',(req,res,next) =>sendpage(req,res,next,'register.html'));
 app.get('/respass',(req,res,next) => sendpage(req,res,next,'respass.html'));
 
 app.use(express.urlencoded({extended:true}));
 //respass post.
-app.post('/respass',(req,res)=>{
+app.post('/respass',async(req,res)=>{
     console.log(`Reset email:`,req.body);
     const {email} = req.body;
+//Check if the email exists
+    const User = require("./models/user");
+    const Searchuser = await User.findOne({ email });
+//    
+//if()
+//Generate the OTP
+const otp = crypto.randomInt(100000, 999999).toString();
+//Hash the OTP
+const otpHash = await bcrypt.hash(otp, 10);
     const cleanemail = email.trim().toLowerCase();
     const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!cleanemail){
@@ -71,7 +80,8 @@ app.post('/respass',(req,res)=>{
     if (!emailpattern.test(cleanemail)){
         return res.status(400).send("Invild email.");
     }
-    res.status(200).send(`Done .`);
+    
+    res.status(200).send(`If an account with that email exists, we have sent a verification code.`);
 });
 //login post.
 app.post('/login',(req,res)=> {
@@ -90,7 +100,7 @@ app.post('/register', async (req,res)=>{
     try {
     console.log(`Register data:`,req.body);
     const { username , email , password , confirmpassword } = req.body;
-    if ( !username || !email || !password || !confirmpassword ){
+    if ( !username||username == "" || !email||email == || !password || !confirmpassword ){
         return res.status(400).send("All fields required.");
     }
     //Clean user inputs.
