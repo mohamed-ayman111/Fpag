@@ -10,6 +10,10 @@ process.on('unhandledRejection', err => {
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo').default;
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const app = express();
 const env = process.env;
 const config = {
@@ -26,6 +30,7 @@ const port = config.port || 3000 ;
     console.log(req.method, req.url);next()
 });*/
 app.use(express.static(path.join(__dirname,'public')));
+console.log(MongoStore);
 console.log("mongoose:",env.MONURI);
 mongoose.connect(config.mon)
 .then(() =>{ console.log("Connected successfly to db.");
@@ -52,12 +57,72 @@ function sendpage(req,res,next,filename) {
 /*app.get('/error',(req,res,next) => {
     throw new Error("Test server Error");
 });*/
-app.get('/', (req,res,next) => sendpage(req,res,next,'main.html'));
-app.get('/about',(req,res,next) => sendpage(req,res,next,'about.html'));
-app.get('/login',(req,res,next) =>sendpage(req,res,next,'login.html'));
-app.get('/register',(req,res,next) =>sendpage(req,res,next,'register.html'));
-app.get('/respass',(req,res,next) => sendpage(req,res,next,'respass.html'));
-
+app.use(helmet());
+app.use(session({
+    name : 'sid' ,
+    secret : process.env.SESSION_SECRET ,
+    resave : false ,
+    saveUninitialized : false ,
+    store : MongoStore.create({
+        mongoUrl : config.mon ,
+        collectionName : 'sessions'
+    }),
+    cookie : {
+        maxAge : 1000 * 60 *60 *24 ,
+        httpOnly : true ,
+        secure : false ,
+        sameSite : 'lax'
+    }
+}));
+function isAuth(req,res,next){
+    if (!req.session.userId){
+        return res.status(401).redirect('/login');        
+    }
+    next();
+}
+function isAdmin (req,res,next){
+    if (!req.session.userId){
+        return res.status(401).send("Unauthorized.");
+    }
+    if (req.session.userId.role !== 'admin') {
+        return res.status(403).send("Forbidden.");
+    }
+    next();
+}
+function isGuest(req,res,next){
+    if (req.session.userId){
+        return res.redirect('/dashboard');
+    }
+    next();
+}
+app.get('/',isAuth, (req,res,next) => sendpage(req,res,next,'main.html'));
+app.get('/about',isAuth,(req,res,next) => sendpage(req,res,next,'about.html'));
+app.get('/login', isGuest, (req,res,next) => sendpage(req,res,next,'login.html'));
+app.get('/register',(req,res,next) => sendpage(req,res,next,'register.html'));
+app.get('/respass',isAuth,(req,res,next) => sendpage(req,res,next,'respass.html'));
+app.get('/dashboard' , isAuth, (req,res,next) => sendpage(req,res,next,'dashboard.html'));
+app.get('/admin' , isAdmin,isAuth, (req,res) =>{
+    res.send("Welcome admin.");
+});
+app.get('/check',(req,res)=>{
+    console.log(req.session);
+    if (req.session.userId) {
+        res.send("User logged in.");
+    } else {
+        res.send("Not logges in.");
+    }
+});
+app.get('/logout' , (req,res) =>{
+    req.session.destroy(err => {
+        if (err) return res.status(500).send("Logout error.");
+        res.clearCookie('sid');
+        res.redirect('/login');
+    });
+});
+app.use((req, res ,next) => {
+    res.locals.user = req.session.user || null ;
+    next();
+});
 app.use(express.urlencoded({extended:true}));
 //respass post.
 app.post('/respass',(req,res)=>{
@@ -74,15 +139,40 @@ app.post('/respass',(req,res)=>{
     res.status(200).send(`Done .`);
 });
 //login post.
-app.post('/login',(req,res)=> {
+app.post('/login', async (req,res) => {
+    try{
     console.log(`login data:`,req.body);
+    console.log(`login data:`,req.para);
     const { username , password } = req.body;
     if ( !username || !password ){
         return res.status(400).send("All fields required.");
     }
-    res.status(200).send(`Welcome ${username}.`);
+    //Seach user on db.
+    const user = await User.findOne({ username });
+    if ( !user ){
+        console.log("User not found.");
+        return res.status(400).send("user not found.");
+    } else {
+        console.log("User exists.");
+    }
+    //Compare password.
+    const isMatch = await bcrypt.compare(password, user.password);
+    if  (!isMatch){
+        return res.status(400).send("Invalid password.");
+    }
+    req.session.userId = user._id;
+    //res.status(200).send(`Welcome ${user.username}`)
+    res.status(200).send(`Welcome ${user.username}.`);
+} catch (err){
+    console.error(err);
+    res.Status(500).send("Server error.");
+} });
+//Secere from brute foce.
+const loginlimiter = rateLimit({
+    windowMs : 15 * 60 * 1000,
+    max : 5
 });
-
+app.use('/login', loginlimiter);
 //Registration form proccessing.
 const User = require("./models/user");
 const bcrypt = require("bcrypt");
@@ -105,7 +195,7 @@ const cleanemail = email.trim().toLowerCase();
 //Check username.
 const userpattern = /^[a-zA-Z0-9_]{3,20}$/;
 if ( !userpattern.test(cleanusername) ){
-    return res.status(400).send("Invaild username.");
+     res.status(400).send("Invaild username.");
 }
 //Check email.
 const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
