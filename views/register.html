@@ -1,50 +1,14 @@
 <!DOCTYPE HTML>
 <HTML>
     <head>
-        <script>
-            function dataform(){
-                var form = document.forms["registration"];  
-                var username = form["username"].value.trim();
-                var email = form["email"].value.trim();
-                var password = form["password"].value.trim();
-                var confirmpassword = form["confirmpassword"].value.trim();
-                var emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                var passwordpattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/; 
-               //Check input fields required.
-                if(!username||username == ""||!email||email == "" || !password||password == "" ||!confirmpassword||confirmpassword == "" ){
-                    alert("All field are required");
-                    return false;
-                }
-                //Check username lenght.
-                if (username.length < 3){
-                    alert("Username must be at least 3 characters.");
-                    return false;
-                }
-                //Check email.
-                if (!emailpattern.test(email)){
-                    alert("Invalid email format.");
-                    return false;
-                }
-                //Check password.
-                if (!passwordpattern.test(password)){
-                    alert("Passwod must contain uppercase, lowercase ,number ,and be 8+ chars");
-                    return false;
-                }
-                if (password != confirmpassword){
-                    alert("Password do not match.");
-                    return false;
-                }
-                alert("Registartion done successfly");
-                return true;
-            }
-        </script>
+        <script src="/js/register.js" defer></script>
         <link rel="stylesheet" href="/css/register.css">
         <title>Register</title>
     </head>
     <body>
         <div class="regist-box">
         <h1>Sign-up</h1>
-        <form action="/register" method="POST" name="registration" novalidate onsubmit="return dataform()">
+        <form action="/register" method="POST" name="registration" novalidate>
             <div class="form-control">
                         <input type="text" name="username" required="">
                         <label>

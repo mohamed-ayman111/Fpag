@@ -1,24 +1,6 @@
 <!doctype html>
 <html>
     <head>
-        <script>
-            function dataform(){
-                var form = document.forms["respass"];
-                var email = form["email"].value.trim();
-                var emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                
-                if (!email){
-                    alert("Email is required.");
-                    return false;
-                } 
-                if (!emailpattern.test(email)){
-                    alert("Invaild email.");
-                    return false;
-                }
-                alert("Done");
-                return true;
-            }
-            </script>
         <title>
             Reseting
             </title>
@@ -32,7 +14,7 @@
 Enter your user account's verified email address and we will send you a password reset link.
 
 </p>
-<form action="/respass" method="POST" name="respass" novalidate onsubmit="return dataform()">
+<form action="/respass" method="POST" name="respass" novalidate>
 <div class="field">
 <label for="email">Email</label>
 <input type="email" name="email" placeholder="Enter your email address">
@@ -41,5 +23,6 @@ Enter your user account's verified email address and we will send you a password
 <button type="submit">Send password reset email</button>
     </form>
 </div>
+<script src="/js/respass.js" ></script>
             </body>
         </html>

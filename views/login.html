@@ -1,25 +1,15 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <script>
-            function dataform(){
-                form = document.forms["loginbox"];
-                var username = form.["username"].value.trim();
-                var password = form.["password"].value.trim();
-                var passwordpattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
-                 if ( passwordpattern.test(password) ){
-                    return alert("");
-                 }
-            }
-        </script>
-        <meta charset="uft-8">
+        <script src="/js/login.js" defer ></script>
+        <meta charset="utf-8">
         <title>Login</title>
         <link rel="stylesheet" href="/css/login.css">
         </head>
         <body>
             <div class="login-box">
                 <h1>Login</h1>
-                <form action="/login" method="POST" name="loginbox" novalidate onsubmit>
+                <form action="/login" method="POST" name="loginbox" novalidate>
                     <!-- From Uiverse.io by liyaxu123 --> 
                      <div class="form-control">
                         <input type="text" name="username" required="">
@@ -29,10 +19,24 @@
                     </div>
                     <!-- From Uiverse.io by liyaxu123 --> 
                      <div class="form-control">
-                        <input type="password" name="password" required="">
-                        <label>
-                            <span style="transition-delay:0ms">P</span><span style="transition-delay:50ms">a</span><span style="transition-delay:100ms">s</span><span style="transition-delay:150ms">s</span><span style="transition-delay:200ms">w</span><span style="transition-delay:250ms">o</span><span style="transition-delay:300ms">r</span><span style="transition-delay:350ms">d</span>
-                        </label>
+                        <input
+        type="password"
+        id="password"
+        name="password"
+        required="">
+
+    <label>
+        <span style="transition-delay:0ms">P</span><span style="transition-delay:50ms">a</span><span style="transition-delay:100ms">s</span><span style="transition-delay:150ms">s</span><span style="transition-delay:200ms">w</span><span style="transition-delay:250ms">o</span><span style="transition-delay:300ms">r</span><span style="transition-delay:350ms">d</span>
+    </label>
+
+    <button
+        type="button"
+        id="togglePassword"
+        class="toggle-password">
+
+        👁
+
+    </button>
                     </div>
                     <div class="poss">                    
                     <button type="submit">Login</button>
@@ -41,7 +45,9 @@
 
                 <div class="footer-text">
                     <p>Create account <a href="/register">Sing up.</a></p>
+                </div>
                              <a href="/respass"><p>Forgot password?</p></a>
-            </div>
+                             <!--a href="/test"><p>Test page</p></a-->
+                             <script src="/js/passtoggle.js"></script>
         </body>
         </html>                                

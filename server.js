@@ -57,7 +57,6 @@ function sendpage(req,res,next,filename) {
 /*app.get('/error',(req,res,next) => {
     throw new Error("Test server Error");
 });*/
-<<<<<<< HEAD
 app.use(helmet());
 app.use(session({
     name : 'sid' ,
@@ -100,7 +99,7 @@ app.get('/',isAuth, (req,res,next) => sendpage(req,res,next,'main.html'));
 app.get('/about',isAuth,(req,res,next) => sendpage(req,res,next,'about.html'));
 app.get('/login', isGuest, (req,res,next) => sendpage(req,res,next,'login.html'));
 app.get('/register',(req,res,next) => sendpage(req,res,next,'register.html'));
-app.get('/respass',isAuth,(req,res,next) => sendpage(req,res,next,'respass.html'));
+app.get('/respass',isGuest,(req,res,next) => sendpage(req,res,next,'respass.html'));
 app.get('/dashboard' , isAuth, (req,res,next) => sendpage(req,res,next,'dashboard.html'));
 app.get('/admin' , isAdmin,isAuth, (req,res) =>{
     res.send("Welcome admin.");
@@ -124,28 +123,24 @@ app.use((req, res ,next) => {
     res.locals.user = req.session.user || null ;
     next();
 });
-=======
+
 app.get('/', (req,res,next) => sendpage(req,res,next,'main.html'));
 app.get('/about',(req,res,next) => sendpage(req,res,next,'about.html'));
 app.get('/login',(req,res,next) =>{ console.log("LOGIN ROUTE WORKING");sendpage(req,res,next,'login.html')});
 app.get('/register',(req,res,next) =>sendpage(req,res,next,'register.html'));
 app.get('/respass',(req,res,next) => sendpage(req,res,next,'respass.html'));
+app.get('/test',(req,res,next) => sendpage(req,res,next,'test.html'));
 
->>>>>>> cf690743ca912661ef8f1852a78ed0294103e6ef
 app.use(express.urlencoded({extended:true}));
 //respass post.
+const crypto = require("crypto");
+ const User = require("./models/user");
+ const PasswordReset = require("./models/passwordreset");
+ const { sendOTPEmail } = require("./services/emailService");
 app.post('/respass',async(req,res)=>{
+    try{
     console.log(`Reset email:`,req.body);
     const {email} = req.body;
-//Check if the email exists
-    const User = require("./models/user");
-    const Searchuser = await User.findOne({ email });
-//    
-//if()
-//Generate the OTP
-const otp = crypto.randomInt(100000, 999999).toString();
-//Hash the OTP
-const otpHash = await bcrypt.hash(otp, 10);
     const cleanemail = email.trim().toLowerCase();
     const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!cleanemail){
@@ -154,30 +149,93 @@ const otpHash = await bcrypt.hash(otp, 10);
     if (!emailpattern.test(cleanemail)){
         return res.status(400).send("Invild email.");
     }
-    
-    res.status(200).send(`If an account with that email exists, we have sent a verification code.`);
+//Check if the email exists
+    const Searchuser = await User.findOne({ email: cleanemail });
+//    
+if ( !Searchuser ){
+        console.log("Email not found.");
+        return res.status(200).send("If an account with that email exists, we have sent a verification code.");
+    }
+        console.log("Email exists.");
+
+        //Delete previous otp
+        await PasswordReset.deleteMany({
+    userId: Searchuser._id
+});
+
+        //Generate the OTP
+const otp = crypto
+            .randomInt(100000, 1000000)
+            .toString();
+            console.log("OTP generated.");
+
+            //Hash the OTP
+const otpHash = await bcrypt.hash(otp, 10);
+
+//Calculate expiration
+const ExpiresAt = new Date(
+    Date.now() + 5 * 60 * 1000
+);
+
+//Create passwordreset document
+const reset = new PasswordReset({
+    userId: Searchuser._id,
+
+    email: Searchuser.email,
+
+    otpHash: otpHash,
+
+    expiresAt : ExpiresAt
+
+});
+
+//Save to MongoDB
+await reset.save();
+console.log("OTP information saved.");
+
+//
+const transporter = require("./config/mail");
+
+transporter.verify()
+    .then(() => {
+        console.log("SMTP connection successful.");
+    })
+    .catch((err) => {
+        console.error("SMTP connection failed:", err);
+    });
+//Send otp to email
+await sendOTPEmail(
+            Searchuser.email,
+            otp
+        );
+        console.log("OTP email sent.");
+    return res.status(200).send(`If an account with that email exists, we have sent a verification code.`);
+    }catch(err){
+    console.error("Password reset error:",err);
+
+    res.status(500).send("Server Error");
+    }
 });
 //login post.
 app.post('/login', async (req,res) => {
     try{
-    console.log(`login data:`,req.body);
     console.log(`login data:`,req.para);
     const { username , password } = req.body;
-    if ( !username || !password ){
+    if ( !username||username == "" || !password||password == "" ){
         return res.status(400).send("All fields required.");
     }
-    //Seach user on db.
+    //Search user on db.
     const user = await User.findOne({ username });
     if ( !user ){
         console.log("User not found.");
-        return res.status(400).send("user not found.");
+        return res.status(400).send("Username or pssword not corrct.");
     } else {
         console.log("User exists.");
     }
     //Compare password.
     const isMatch = await bcrypt.compare(password, user.password);
     if  (!isMatch){
-        return res.status(400).send("Invalid password.");
+        return res.status(400).send("Username or pssword not corrct.");
     }
     req.session.userId = user._id;
     //res.status(200).send(`Welcome ${user.username}`)
@@ -193,13 +251,13 @@ const loginlimiter = rateLimit({
 });
 app.use('/login', loginlimiter);
 //Registration form proccessing.
-const User = require("./models/user");
+//const User = require("./models/user");
 const bcrypt = require("bcrypt");
 app.post('/register', async (req,res)=>{
     try {
     console.log(`Register data:`,req.body);
     const { username , email , password , confirmpassword } = req.body;
-    if ( !username||username == "" || !email||email == || !password || !confirmpassword ){
+    if ( !username||username == "" || !email||email == "" || !password||password == "" || !confirmpassword||confirmpassword == "" ){
         return res.status(400).send("All fields required.");
     }
     //Clean user inputs.

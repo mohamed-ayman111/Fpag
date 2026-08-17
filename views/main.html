@@ -28,8 +28,8 @@
             <div class="head">
                 <a href="#">Home</a>
                 <a href="#">List</a>
-                <a href="/about.html">About</a>
-                <a href="#">Shopbag</a>
+                <a href="/about">About</a>
+                <a href="#">Cart</a>
               <!--  <a href="/login"><button class="btn">Sign in</button></a> -->
             </div>
             <a href="/login"><button class="btn">Sign in</button></a>
@@ -47,8 +47,16 @@
         and modern design at affordable prices. Walk better. Feel better. Look better.
     </p>
                     <div class="landing-pag-search">
-                        <input type="text" placeholder="Start type..."/>
-                <button class="btn">SEARCH</button>                        
+                        <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Start type..."
+                        autocomplete="off"
+                        />
+                <button
+                type="button"
+                id="searchButton" 
+                class="btn">SEARCH</button>                        
                     </div>
                 </div>
                 <div class="landing-pag-photo">
@@ -62,7 +70,13 @@
                     <h1>Tranding model</h1>
                     <button class="btn">View all</button>
                 </div>
-            </div>
+    </div>
+    <div class="carousel">
+        <button
+        class="scroll-btn prev"
+        type="button">
+        ←
+    </button>
             <div class="cards">
                 <div class="card">
                     <img src="/images/m_sj.jpg">
@@ -126,9 +140,7 @@
                                             <img src="/images/icon.svg">
                                             </a>
                                     </div>
-                    </div>
-                    </div>
-                    <div class="cards">
+                                </div>
                          <div class="card">
                             <img src="/images/new1.jpeg">
                             <div class="card-info">
@@ -189,8 +201,6 @@
                                         </a>
                                 </div>
                             </div>
-                            </div>
-                            <div class="cards">
                              <div class="card">
                             <img src="/images/new6.jpeg">
                             <div class="card-info">
@@ -251,8 +261,6 @@
                                         </a>
                                 </div>
                             </div>
-                            </div>
-                            <div class="cards">
                              <div class="card">
                             <img src="/images/new11.jpeg">
                             <div class="card-info">
@@ -313,8 +321,6 @@
                                         </a>
                                 </div>
                             </div>
-                            </div>
-                            <div class="cards">
                              <div class="card">
                             <img src="/images/new16.jpeg">
                             <div class="card-info">
@@ -349,8 +355,17 @@
                                     <a href="#">
                                         <img src="/images/icon.svg">
                                         </a>
-                                </div>
                             </div>
                         </div>
-            </body>
+                        </div>
+                        <button
+                                class="scroll-btn next"
+                                type="button">
+                                →
+                            </button>
+                        </div>
+                    
+            <script src="/js/main.js" defer></script>
+            <script src="/js/carousels.js" defer></script>
+                    </body>
             </html>
