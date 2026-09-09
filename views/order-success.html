@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Successful</title>
+
+</head>
+
+<body>
+
+    <main>
+
+        <h1>Order Placed Successfully</h1>
+
+        <p>
+            Thank you for your order.
+        </p>
+
+        <p id="orderId"></p>
+
+        <a href="/main.html">
+            Continue Shopping
+        </a>
+
+        <br>
+
+        <a href="/orders.html">
+            View My Orders
+        </a>
+
+    </main>
+
+
+    <script>
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const orderId =
+            params.get("id");
+
+
+        if (orderId) {
+
+            document.getElementById(
+                "orderId"
+            ).textContent =
+                `Order ID: ${orderId}`;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

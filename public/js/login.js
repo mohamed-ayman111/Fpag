@@ -7,6 +7,7 @@ form.addEventListener("submit", function (e) {
     if (!username || !password) {
         e.preventDefault();
         alert("All fields are required.");
+        return;
     }
 });
         

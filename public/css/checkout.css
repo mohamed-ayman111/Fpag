@@ -1,0 +1,220 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #f5f5f5;
+
+    color: #222;
+}
+
+
+.checkout-container {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: 50px auto;
+}
+
+
+.checkout-container > h1 {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+.checkout-layout {
+
+    display: grid;
+
+    grid-template-columns: 1fr 400px;
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* Sections */
+
+.checkout-form-section,
+.order-summary {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.checkout-form-section h2,
+.order-summary h2 {
+
+    margin-top: 0;
+
+    margin-bottom: 25px;
+}
+
+
+/* Form */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color: #555;
+}
+
+
+/* Button */
+
+#placeOrderBtn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* Summary */
+
+#checkoutItems {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.checkout-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.checkout-item img {
+
+    width: 65px;
+
+    height: 65px;
+
+    object-fit: contain;
+
+    border-radius: 6px;
+}
+
+
+.checkout-item-info {
+
+    flex: 1;
+}
+
+
+.checkout-item-info h3 {
+
+    margin: 0 0 5px;
+
+    font-size: 15px;
+}
+
+
+.checkout-item-info p {
+
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+.summary-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 2px solid #ddd;
+
+    font-size: 20px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .checkout-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+}

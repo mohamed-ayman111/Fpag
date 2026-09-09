@@ -2,13 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
 </head>
 <body>
+    <div class="header">
+        <div class="header-font">
     <h1>Welcome to dashboard.</h1>
-    <p>You are logged in.</p>
-    <a href="/logout">logout.</a>
+    </div>
+    <div class="head">
     <a href="/">Home</a>
+    <a href="/Products">Products enrollment</a>
+    <a href="/check">check</a>
+    </div>
+    <a href="/logout"><button class="btn">Logout</button></a>
+    </div>
+
+    <div class="landing-pag-search">
+                        <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Start type..."
+                        autocomplete="off"
+                        />
+                <button
+                type="button"
+                id="searchButton" 
+                class="btn">SEARCH</button>                        
+                    </div>
+
+    <main>
+        <div id="productsContainer">
+            </div>
+        </main>
+        <script src="/js/product-card.js" defer></script>
+    <script src="/js/dashboard.js" defer></script>
 </body>
 </html>

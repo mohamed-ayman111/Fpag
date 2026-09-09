@@ -15,12 +15,21 @@
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         </head>
         <body>
-            <div class="header">
+            <!-- ========================= 
+             Dynamic Header 
+             ========================== --> 
+             <div id="headerContainer"></div> 
+             
+             <!-- ========================= 
+              Dynamic Landing Page 
+              ========================== --> 
+              <div id="landingContainer"></div>
+            <!--div class="header">
             <img src="/images/logo.jpg" class="photo">
             <!--div class="header-input">
                 <input />
                 <button class="btn">SEARCH</button>
-            </div-->
+            </div->
             <div class="header-font">
                 <h1>Welcome back</h1>
                 <h1>Giad shose website</h1>
@@ -29,10 +38,10 @@
                 <a href="#">Home</a>
                 <a href="#">List</a>
                 <a href="/about">About</a>
-                <a href="#">Cart</a>
-              <!--  <a href="/login"><button class="btn">Sign in</button></a> -->
+                <a href="/cart">Cartshopping</a>
+              <!--  <a href="/login"><button class="btn">Sign in</button></a> ->
             </div>
-            <a href="/login"><button class="btn">Sign in</button></a>
+            <a href="/logout"><button class="btn">Logout</button></a>
             </div>
             <div class="landing-pag">
                 <div class="landing-pag-text">
@@ -62,7 +71,7 @@
                 <div class="landing-pag-photo">
                     <img src="/images/logo.jpg">
                 </div>
-            </div>
+            </div -->
             <!--Tranding part-->
             <div class="tranding-pag">
                 <span>Tranding</span>
@@ -71,7 +80,11 @@
                     <button class="btn">View all</button>
                 </div>
     </div>
-    <div class="carousel">
+    <main>
+        <div id="productsContainer">
+            </div>
+    </main>
+     <!--div class="carousel">
         <button
         class="scroll-btn prev"
         type="button">
@@ -84,6 +97,7 @@
                         <div class="card-name">
                             <p>Traditional shoe</p>
                             <h3>Mrkob throji</h3>
+                            <strong>1200</strong>
                             </div>
                             <a href="#">
                                 <img src="/images/icon.svg">
@@ -127,9 +141,6 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <!--div class="like-btn">
-                                        <img src="../assets/css/photo/like-icon.svg">
-                                    </div-->
                                     <img src="/images/slama.jpg">
                                     <div class="card-info">
                                         <div class="card-name">
@@ -361,11 +372,12 @@
                         <button
                                 class="scroll-btn next"
                                 type="button">
+                            
                                 →
                             </button>
-                        </div>
-                    
-            <script src="/js/main.js" defer></script>
-            <script src="/js/carousels.js" defer></script>
+                        </div--> 
+                        <script src="/js/cart.js" defer ></script>
+                        <script src="/js/product-card.js" defer ></script>
+            <script src="/js/main.js" defer ></script>
                     </body>
             </html>

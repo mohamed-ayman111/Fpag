@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="/css/edit-product.css">
+</head>
+<body>
+    <div class="products">
+        <h2>Products enrollment</h2>
+    <form id="editProductForm"  name="Editproduct" novalidate>
+        <div class="input-filed">
+        <label>Product name</label>
+            <input type="text" name="name" id="name" placeholder="Enter product name">
+            </div>
+            <div class="input-filed">
+    <label for="category">Product category</label>
+
+    <select name="category" id="category" required>
+        <option value="" selected disabled>
+            Select category
+        </option>
+
+        <option value="Shoes">Shoes</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Bags">Bags</option>
+        <option value="Home">Home</option>
+    </select>
+</div>
+            <div class="input-filed">
+                <label>Product description</label>
+            <input type="text" name="description" id="description" placeholder="Enter product description">
+            </div>
+            <div class="input-filed">
+                <label>Product price</label>
+            <input type="number" name="price" min="0" step="0.01" id="price" placeholder="Enter product price">
+            </div>
+            <div class="input-filed">
+                <label>produt image</label>
+            <input type="text" name="image" id="image" placeholder="Enter path image">
+            </div>
+            <div class="input-filed">
+                <label>Produt stock</label>
+            <input type="number" name="stock" min="0" id="stock" placeholder="Enter product Stock">
+            </div>
+            <div class="poss">
+            <button type="submit">Update</button>
+            </div>            
+</form>
+</div>
+<script src="/js/edit-product.js" defer></script>
+</body>
+</html>

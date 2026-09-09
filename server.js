@@ -29,9 +29,14 @@ const port = config.port || 3000 ;
 /*app.use((req,res,next) => {
     console.log(req.method, req.url);next()
 });*/
+app.use(express.json());
+
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.static(path.join(__dirname,'public')));
 console.log(MongoStore);
-console.log("mongoose:",env.MONURI);
+console.log("MongoDB URI loaded:", !!process.env.MONGO_URI);
 mongoose.connect(config.mon)
 .then(() =>{ console.log("Connected successfly to db.");
     app.listen(port,hostname,() => {
@@ -80,30 +85,62 @@ function isAuth(req,res,next){
     }
     next();
 }
-function isAdmin (req,res,next){
-    if (!req.session.userId){
-        return res.status(401).send("Unauthorized.");
+async function isAdmin (req,res,next){
+
+    try {
+
+        if (!req.session.userId) {
+            return res.status(401).json({
+                message: "Authentication required"
+            });
+        }
+
+        const user = await User.findById(req.session.userId);
+
+        if (!user) {
+            return res.status(401).json({
+                message: "User not found"
+            });
+        }
+
+        if (user.role !== "admin") {
+            return res.status(403).json({
+                message: "Admin access required"
+            });
+        }
+
+        req.user = user;
+
+        next();
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Authorization failed"
+        });
+
     }
-    if (req.session.userId.role !== 'admin') {
-        return res.status(403).send("Forbidden.");
-    }
-    next();
 }
 function isGuest(req,res,next){
     if (req.session.userId){
-        return res.redirect('/dashboard');
+        return res.redirect('/');
     }
     next();
 }
-app.get('/',isAuth, (req,res,next) => sendpage(req,res,next,'main.html'));
-app.get('/about',isAuth,(req,res,next) => sendpage(req,res,next,'about.html'));
-app.get('/login', isGuest, (req,res,next) => sendpage(req,res,next,'login.html'));
-app.get('/register',(req,res,next) => sendpage(req,res,next,'register.html'));
+app.get('/', (req,res,next) => sendpage(req,res,next,'main.html'));
+app.get('/about',/*isGuest,*/(req,res,next) => sendpage(req,res,next,'about.html'));
+app.get('/login', /*isGuest,*/ (req,res,next) => sendpage(req,res,next,'login.html'));
+app.get('/register',isGuest,(req,res,next) => sendpage(req,res,next,'register.html'));
 app.get('/respass',isGuest,(req,res,next) => sendpage(req,res,next,'respass.html'));
-app.get('/dashboard' , isAuth, (req,res,next) => sendpage(req,res,next,'dashboard.html'));
+app.get('/dashboard' ,isAdmin, (req,res,next) => sendpage(req,res,next,'dashboard.html'));
+app.get('/cart' ,isAuth, (req,res,next) => sendpage(req,res,next,'cart.html'));
+app.get('/checkout' ,isAuth, (req,res,next) => sendpage(req,res,next,'checkout.html'));
 app.get('/admin' , isAdmin,isAuth, (req,res) =>{
     res.send("Welcome admin.");
 });
+app.get('/Products', isAuth,(req,res,next) => sendpage(req,res,next,'Addproduct.html'));
 app.get('/check',(req,res)=>{
     console.log(req.session);
     if (req.session.userId) {
@@ -112,13 +149,54 @@ app.get('/check',(req,res)=>{
         res.send("Not logges in.");
     }
 });
-app.get('/logout' , (req,res) =>{
-    req.session.destroy(err => {
-        if (err) return res.status(500).send("Logout error.");
-        res.clearCookie('sid');
-        res.redirect('/login');
+
+app.get("/api/auth/status", (req, res) => {
+
+    if (!req.session.userId) {
+
+        return res.json({
+            loggedIn: false,
+            role: "guest"
+        });
+
+    }
+
+    res.json({
+        loggedIn: true,
+        userId: req.session.userId,
+        role: req.session.role || "user"
     });
 });
+app.get('/logout' , (req,res) =>{
+    req.session.destroy((error) => {
+
+        if (error) {
+            console.error(error);
+
+            return res.status(500).send(
+                "Unable to logout"
+            );
+        }
+
+        res.clearCookie("connect.sid");
+
+        res.redirect("/");
+    });
+});
+app.get(
+    "/edit-product",
+    isAdmin,
+    (req, res, next) => {
+
+        sendpage(
+            req,
+            res,
+            next,
+            "edit-product.html"
+        );
+
+    }
+);
 app.use((req, res ,next) => {
     res.locals.user = req.session.user || null ;
     next();
@@ -130,8 +208,373 @@ app.get('/login',(req,res,next) =>{ console.log("LOGIN ROUTE WORKING");sendpage(
 app.get('/register',(req,res,next) =>sendpage(req,res,next,'register.html'));
 app.get('/respass',(req,res,next) => sendpage(req,res,next,'respass.html'));
 app.get('/test',(req,res,next) => sendpage(req,res,next,'test.html'));
+app.get('/Products',(req,res,next) => sendpage(req,res,next,'Addproduct.html'));
+
 
 app.use(express.urlencoded({extended:true}));
+
+//Process product enrollment
+app.post('/Products',async(req,res)=>{
+    try{
+        const Product = require("./models/Product"); 
+        const { name,category,description,price,image,stock} = req.body;
+        console.log("Product enrollment:",req.body);
+        const newproduct = new Product({
+            name: name ,
+            category: category,
+            description: description,
+            price: price,
+            image: image ,
+            stock: stock
+        });
+        await newproduct.save();
+        console.log("Product enrollment saved.");
+        return res.status(200).send(`Data update ok.`);
+    }catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to enrollment products"
+        });
+
+    }
+});
+//API product
+const Product = require("./models/Product");
+
+app.get("/api/products", async (req, res) => {
+
+    try {
+
+        const products = await Product.find();
+
+        res.json(products);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch products"
+        });
+
+    }
+});
+
+//Delete product
+app.delete(
+    "/api/products/:id",
+    isAdmin,
+    async (req, res) => {
+
+        try {
+
+            const product =
+                await Product.findByIdAndDelete(req.params.id);
+
+            if (!product) {
+
+                return res.status(404).json({
+                    message: "Product not found"
+                });
+
+            }
+
+            res.status(200).json({
+                message: "Product deleted successfully"
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+            res.status(500).json({
+                message: "Failed to delete product"
+            });
+
+        }
+
+    }
+);
+//Edit product
+//const Product = require("./models/Product");
+app.get(
+    "/api/products/:id",
+    isAdmin,
+    async (req, res) => {
+
+        try {
+
+            const product =
+                await Product.findById(
+                    req.params.id
+                );
+
+
+            if (!product) {
+
+                return res.status(404).json({
+                    message: "Product not found"
+                });
+
+            }
+
+
+            res.status(200).json(product);
+
+
+        } catch (error) {
+
+            console.error(
+                "Get product error:",
+                error
+            );
+
+
+            res.status(500).json({
+                message:
+                    "Failed to get product"
+            });
+
+        }
+
+    }
+);
+/*
+app.use(express.json());
+
+app.use(express.urlencoded({
+    extended: true
+}));
+*/
+app.patch(
+    "/api/products/:id",
+    isAdmin,
+    async (req, res) => {
+
+        try {
+            console.log("BODY:", req.body);
+            const {
+                name,
+                category,
+                description,
+                price,
+                image,
+                stock
+            } = req.body;
+
+
+            if (
+                !name ||
+                !category ||
+                !description ||
+                !price ||
+                !image ||
+                !stock
+            ) {
+
+                return res.status(400).json({
+
+                    message:
+                        "All fields are required"
+
+                });
+
+            }
+
+
+            const updatedProduct =
+                await Product.findByIdAndUpdate(
+
+                    req.params.id,
+
+                    {
+                        name,
+                        category,
+                        description,
+                        price,
+                        image,
+                        stock
+                    },
+
+                    {
+                        new: true,
+                        runValidators: true
+                    }
+
+                );
+
+
+            if (!updatedProduct) {
+
+                return res.status(404).json({
+
+                    message:
+                        "Product not found"
+
+                });
+
+            }
+
+
+            res.status(200).json({
+
+                message:
+                    "Product updated successfully",
+
+                product:
+                    updatedProduct
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Update product error:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                message:
+                    "Failed to update product"
+
+            });
+
+        }
+
+    }
+);
+
+//Create order
+
+const orderRoutes =
+    require("./routes/orderRoutes");
+    app.use(
+    "/api/orders",
+    orderRoutes
+);
+
+/*
+app.post("/api/orders", async (req, res) => {
+
+    try {
+
+        const Order =
+            require("./models/Order");
+
+        const Product =
+            require("./models/Product");
+
+        const {
+            customer,
+            items
+        } = req.body;
+
+        if (
+            !customer ||
+            !items ||
+            items.length === 0
+        ) {
+
+            return res.status(400).json({
+                message: "Invalid order data"
+            });
+
+        }
+
+        let totalAmount = 0;
+
+        const orderItems = [];
+
+        for (const item of items) {
+
+            const product =
+                await Product.findById(
+                    item.product
+                );
+
+            if (!product) {
+
+                return res.status(404).json({
+                    message:
+                        "Product not found"
+                });
+
+            }
+
+            if (
+                product.stock <
+                item.quantity
+            ) {
+
+                return res.status(400).json({
+                    message:
+                        `Not enough stock for ${product.name}`
+                });
+
+            }
+
+            totalAmount +=
+                product.price *
+                item.quantity;
+
+            orderItems.push({
+
+                product: product._id,
+
+                quantity: item.quantity,
+
+                price: product.price
+
+            });
+
+        }
+
+        const order =
+            new Order({
+
+                customer,
+
+                items: orderItems,
+
+                totalAmount
+
+            });
+
+        await order.save();
+
+        res.status(201).json({
+
+            message:
+                "Order created successfully",
+
+            orderId:
+                order._id
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Create order error:",
+            error
+        );
+
+        res.status(500).json({
+
+            message:
+                "Failed to create order"
+
+        });
+
+    }
+
+});
+*/
 //respass post.
 const crypto = require("crypto");
  const User = require("./models/user");
@@ -194,6 +637,7 @@ await reset.save();
 console.log("OTP information saved.");
 
 //
+
 const transporter = require("./config/mail");
 
 transporter.verify()
@@ -219,7 +663,7 @@ await sendOTPEmail(
 //login post.
 app.post('/login', async (req,res) => {
     try{
-    console.log(`login data:`,req.para);
+    console.log(`login data:`,req.body);
     const { username , password } = req.body;
     if ( !username||username == "" || !password||password == "" ){
         return res.status(400).send("All fields required.");
@@ -238,6 +682,9 @@ app.post('/login', async (req,res) => {
         return res.status(400).send("Username or pssword not corrct.");
     }
     req.session.userId = user._id;
+        req.session.role = user.role;
+
+        res.redirect("/");
     //res.status(200).send(`Welcome ${user.username}`)
     res.status(200).send(`Welcome ${user.username}.`);
 } catch (err){

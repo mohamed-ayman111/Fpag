@@ -109,6 +109,23 @@ body{
     justify-content:space-between;
     padding:20px 0;
 }
+.product-section {
+    margin-bottom: 40px;
+}
+
+.section-header h3{
+    padding:0px 70px;
+    color:slateblue;
+    /*display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;*/
+}
+
+.section-header h2 {
+    margin: 0;
+}
 .carousel {
     position: relative;
     width: 100%;
