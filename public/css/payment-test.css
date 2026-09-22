@@ -1,0 +1,470 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    color: #222;
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.test-payment-container {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* ========================================
+   PAYMENT CARD
+======================================== */
+
+.test-payment-card {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    background: #fff;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.25);
+
+    animation:
+        paymentAppear 0.6s ease;
+}
+
+
+/* ========================================
+   TEST BADGE
+======================================== */
+
+.test-badge {
+
+    display: inline-block;
+
+    background: #fff3cd;
+
+    color: #856404;
+
+    border: 1px solid #ffeeba;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.test-payment-card h1 {
+
+    color: #222;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+#paymentMessage {
+
+    color: #666;
+
+    font-size: 15px;
+
+    margin-bottom: 25px;
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   PAYMENT DETAILS
+======================================== */
+
+.payment-details {
+
+    background: #f7f8fc;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    margin-bottom: 22px;
+
+    border: 1px solid #e8eaf2;
+}
+
+
+/* ========================================
+   DETAIL ROW
+======================================== */
+
+.detail-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #e4e6ee;
+}
+
+
+.detail-row:last-child {
+
+    border-bottom: none;
+}
+
+
+/* ========================================
+   LABEL
+======================================== */
+
+.detail-row span {
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   VALUE
+======================================== */
+
+.detail-row strong {
+
+    color: #333;
+
+    font-size: 14px;
+
+    text-align: right;
+
+    word-break: break-all;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+#status {
+
+    color: #f39c12;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+.payment-error {
+
+    min-height: 20px;
+
+    margin-bottom: 15px;
+
+    color: #e74c3c;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.payment-actions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+
+/* ========================================
+   BUTTON BASE
+======================================== */
+
+.payment-actions button {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 13px 18px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ========================================
+   PAY BUTTON
+======================================== */
+
+#payButton {
+
+    background: #2ecc71;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px
+        rgba(46, 204, 113, 0.25);
+}
+
+
+#payButton:hover:not(:disabled) {
+
+    background: #27ae60;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(46, 204, 113, 0.35);
+}
+
+
+/* ========================================
+   FAIL BUTTON
+======================================== */
+
+.fail-button {
+
+    background: #f39c12;
+
+    color: white;
+}
+
+
+.fail-button:hover:not(:disabled) {
+
+    background: #e67e22;
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   CANCEL BUTTON
+======================================== */
+
+.cancel-button {
+
+    background: #f1f3f5;
+
+    color: #555;
+
+    border:
+        1px solid #ddd !important;
+}
+
+
+.cancel-button:hover:not(:disabled) {
+
+    background: #e9ecef;
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   DISABLED
+======================================== */
+
+.payment-actions button:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ========================================
+   WARNING
+======================================== */
+
+.test-warning {
+
+    margin-top: 25px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #fff8e1;
+
+    border:
+        1px solid #ffe082;
+
+    color: #7a5c00;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes paymentAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 550px) {
+
+    .test-payment-card {
+
+        padding: 25px 20px;
+
+        border-radius: 15px;
+    }
+
+
+    .test-payment-card h1 {
+
+        font-size: 24px;
+    }
+
+
+    .payment-details {
+
+        padding: 12px;
+    }
+
+
+    .detail-row {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    .detail-row strong {
+
+        text-align: left;
+
+        max-width: 100%;
+    }
+
+}

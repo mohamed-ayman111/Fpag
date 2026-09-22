@@ -1,42 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/main.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <title>Admin Dashboard</title>
+
 </head>
+
 <body>
-    <div class="header">
-        <div class="header-font">
-    <h1>Welcome to dashboard.</h1>
-    </div>
-    <div class="head">
-    <a href="/">Home</a>
-    <a href="/Products">Products enrollment</a>
-    <a href="/check">check</a>
-    </div>
-    <a href="/logout"><button class="btn">Logout</button></a>
+
+
+<header class="dashboard-header">
+
+    <div class="brand">
+        FPAG Admin
     </div>
 
-    <div class="landing-pag-search">
-                        <input
-                        type="search"
-                        id="searchInput"
-                        placeholder="Start type..."
-                        autocomplete="off"
-                        />
-                <button
-                type="button"
-                id="searchButton" 
-                class="btn">SEARCH</button>                        
-                    </div>
 
-    <main>
-        <div id="productsContainer">
+    <nav>
+
+        <a href="/dashboard" class="active">
+            Dashboard
+        </a>
+
+        <a href="/Addproduct">
+            Add Product
+        </a>
+
+        <a href="/admin-orders">
+            Orders
+        </a>
+
+        <a href="/">
+            Store
+        </a>
+
+    </nav>
+
+
+    <a href="/logout" class="logout">
+        Logout
+    </a>
+
+</header>
+
+
+
+<main class="dashboard">
+
+
+    <section class="dashboard-heading">
+
+        <div>
+
+            <h1>
+                Dashboard Overview
+            </h1>
+
+            <p>
+                Monitor your store performance
+                and manage your business.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Statistics -->
+
+    <section class="statistics">
+
+
+        <div class="stat-card">
+
+            <span class="stat-label">
+                Products
+            </span>
+
+            <strong id="totalProducts">
+                0
+            </strong>
+
+            <small>
+                Total products
+            </small>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <span class="stat-label">
+                Orders
+            </span>
+
+            <strong id="totalOrders">
+                0
+            </strong>
+
+            <small>
+                Total orders
+            </small>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <span class="stat-label">
+                Pending
+            </span>
+
+            <strong id="pendingOrders">
+                0
+            </strong>
+
+            <small>
+                Orders waiting
+            </small>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <span class="stat-label">
+                Sales
+            </span>
+
+            <strong id="totalSales">
+                ₹0
+            </strong>
+
+            <small>
+                Total sales
+            </small>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- Management -->
+
+    <section class="management">
+
+
+        <div class="panel">
+
+            <h2>
+                Inventory
+            </h2>
+
+            <div class="panel-content">
+
+                <div>
+                    <span>
+                        Low Stock
+                    </span>
+
+                    <strong id="lowStock">
+                        0
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Out of Stock
+                    </span>
+
+                    <strong id="outOfStock">
+                        0
+                    </strong>
+                </div>
+
             </div>
-        </main>
-        <script src="/js/product-card.js" defer></script>
-    <script src="/js/dashboard.js" defer></script>
+
+            <a
+                href="/"
+                class="panel-button"
+            >
+                View Products
+            </a>
+
+        </div>
+
+
+
+        <div class="panel">
+
+            <h2>
+                Orders
+            </h2>
+
+            <div class="panel-content">
+
+                <div>
+                    <span>
+                        Processing
+                    </span>
+
+                    <strong id="processingOrders">
+                        0
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Shipped
+                    </span>
+
+                    <strong id="shippedOrders">
+                        0
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Delivered
+                    </span>
+
+                    <strong id="deliveredOrders">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <a
+                href="/admin-orders"
+                class="panel-button"
+            >
+                Manage Orders
+            </a>
+
+        </div>
+
+
+
+        <div class="panel">
+
+            <h2>
+                Products Management
+            </h2>
+
+            <p>
+                Add new products or manage
+                existing inventory.
+            </p>
+
+
+            <a
+                href="/Addproduct"
+                class="panel-button"
+            >
+                Add Product
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script
+    src="/js/dashboard.js"
+    defer
+></script>
+
 </body>
+
 </html>

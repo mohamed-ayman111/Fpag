@@ -35,6 +35,6 @@ form.addEventListener("submit", function (e){
                     alert(error);
                     return false;
                 }
-                alert("Registartion done successfly");
+
                 return true;
 });

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/payment.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="payment-container">
+
+        <div class="payment-card">
+
+            <h1>
+                Payment
+            </h1>
+
+
+            <!-- Message -->
+
+            <p id="paymentMessage">
+                Loading payment information...
+            </p>
+
+
+            <!-- Payment information -->
+
+            <div class="payment-info">
+
+                <p>
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong id="orderId">
+                        -
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span>
+                        Amount
+                    </span>
+
+                    <strong id="amount">
+                        ₹0
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span>
+                        Method
+                    </span>
+
+                    <strong id="method">
+                        -
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="status">
+                        -
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+            <!-- COD -->
+
+            <div
+                id="codMessage"
+                class="cod-message"
+            >
+            </div>
+
+
+            <!-- Online Payment -->
+
+            <div
+                id="onlinePayment"
+                class="online-payment"
+                hidden
+            >
+
+                <h2>
+                    Online Payment
+                </h2>
+
+
+                <p>
+                    You will be redirected to
+                    the secure payment process.
+                </p>
+
+
+                <button
+                    type="button"
+                    id="payButton"
+                >
+                    Pay Now
+                </button>
+
+            </div>
+
+
+            <!-- Payment error -->
+
+            <p
+                id="paymentError"
+                class="payment-error"
+            >
+            </p>
+
+
+            <div class="payment-links">
+
+                <a href="/orders">
+                    View My Orders
+                </a>
+
+                <a href="/">
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script
+        src="/js/payment.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

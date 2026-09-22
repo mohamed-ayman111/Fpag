@@ -1,0 +1,343 @@
+/* =====================================================
+   VERIFY OTP
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f7fb,
+            #e8eef7
+        );
+
+    color: #1f2937;
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.otp-container {
+    width: 100%;
+    max-width: 460px;
+}
+
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.otp-card {
+    width: 100%;
+
+    padding: 40px 35px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.10);
+
+    text-align: center;
+
+    border: 1px solid #e5e7eb;
+}
+
+
+/* =====================================================
+   TITLE
+   ===================================================== */
+
+.otp-card h1 {
+    margin-bottom: 12px;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+   ===================================================== */
+
+.otp-card > p {
+    margin-bottom: 28px;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+#otpForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =====================================================
+   LABEL
+   ===================================================== */
+
+#otpForm label {
+    align-self: flex-start;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+/* =====================================================
+   OTP INPUT
+   ===================================================== */
+
+#otp {
+    width: 100%;
+
+    height: 58px;
+
+    padding: 10px 15px;
+
+    border: 2px solid #d1d5db;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background: #f9fafb;
+
+    color: #111827;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    letter-spacing: 8px;
+
+    text-align: center;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+#otp:focus {
+    border-color: #2563eb;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =====================================================
+   REMOVE NUMBER SPINNER
+   ===================================================== */
+
+#otp::-webkit-inner-spin-button,
+#otp::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   VERIFY BUTTON
+   ===================================================== */
+
+#otpForm button {
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#otpForm button:hover {
+    background: #1d4ed8;
+
+    box-shadow:
+        0 8px 18px rgba(37, 99, 235, 0.20);
+}
+
+
+#otpForm button:active {
+    transform: scale(0.98);
+}
+
+
+/* =====================================================
+   MESSAGE
+   ===================================================== */
+
+#otpMessage {
+    min-height: 24px;
+
+    margin-top: 18px;
+
+    margin-bottom: 15px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   RESEND BUTTON
+   ===================================================== */
+
+#resendButton {
+    border: none;
+
+    background: transparent;
+
+    color: #2563eb;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding: 8px 12px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+#resendButton:hover {
+    color: #1d4ed8;
+
+    background: #eff6ff;
+
+    border-radius: 8px;
+}
+
+
+/* =====================================================
+   DISABLED BUTTON
+   ===================================================== */
+
+button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 520px) {
+
+    body {
+        padding: 15px;
+    }
+
+
+    .otp-card {
+        padding: 32px 22px;
+
+        border-radius: 15px;
+    }
+
+
+    .otp-card h1 {
+        font-size: 26px;
+    }
+
+
+    #otp {
+        height: 54px;
+
+        font-size: 22px;
+
+        letter-spacing: 6px;
+    }
+
+}
+
+
+@media (max-width: 360px) {
+
+    .otp-card {
+        padding: 28px 18px;
+    }
+
+
+    #otp {
+        font-size: 20px;
+
+        letter-spacing: 4px;
+    }
+
+}

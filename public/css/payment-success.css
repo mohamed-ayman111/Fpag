@@ -1,0 +1,370 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #222;
+
+    padding: 20px;
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.payment-success-container {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* ========================================
+   SUCCESS CARD
+======================================== */
+
+.success-card {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: #ffffff;
+
+    padding: 45px 35px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.25);
+
+    animation:
+        cardAppear 0.6s ease;
+}
+
+
+/* ========================================
+   SUCCESS ICON
+======================================== */
+
+.success-icon {
+
+    width: 85px;
+
+    height: 85px;
+
+    margin: 0 auto 25px;
+
+    border-radius: 50%;
+
+    background: #2ecc71;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 52px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 8px 20px
+        rgba(46, 204, 113, 0.35);
+
+    animation:
+        successPop 0.7s
+        cubic-bezier(
+            0.68,
+            -0.55,
+            0.265,
+            1.55
+        );
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.success-card h1 {
+
+    color: #222;
+
+    font-size: 30px;
+
+    margin-bottom: 15px;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+#successMessage {
+
+    color: #666;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   ORDER ID
+======================================== */
+
+.success-card > p:last-of-type {
+
+    background: #f5f7ff;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    margin-bottom: 30px;
+
+    color: #555;
+
+    font-size: 15px;
+}
+
+
+#orderId {
+
+    display: inline-block;
+
+    margin-left: 5px;
+
+    color: #667eea;
+
+    font-weight: bold;
+
+    word-break: break-all;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.success-actions {
+
+    display: flex;
+
+    gap: 12px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+
+.success-actions a {
+
+    text-decoration: none;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* View Orders */
+
+.success-actions a:first-child {
+
+    background: #667eea;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px
+        rgba(102, 126, 234, 0.3);
+}
+
+
+/* Continue Shopping */
+
+.success-actions a:last-child {
+
+    background: #f1f3f9;
+
+    color: #333;
+}
+
+
+/* ========================================
+   HOVER
+======================================== */
+
+.success-actions a:hover {
+
+    transform: translateY(-2px);
+}
+
+
+.success-actions a:first-child:hover {
+
+    background: #5568d8;
+
+    box-shadow:
+        0 8px 20px
+        rgba(102, 126, 234, 0.4);
+}
+
+
+.success-actions a:last-child:hover {
+
+    background: #e3e6ef;
+}
+
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.96);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes successPop {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.3)
+            rotate(-20deg);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 500px) {
+
+    .success-card {
+
+        padding: 35px 22px;
+
+        border-radius: 15px;
+    }
+
+
+    .success-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 42px;
+    }
+
+
+    .success-card h1 {
+
+        font-size: 25px;
+    }
+
+
+    #successMessage {
+
+        font-size: 14px;
+    }
+
+
+    .success-actions {
+
+        flex-direction: column;
+    }
+
+
+    .success-actions a {
+
+        width: 100%;
+    }
+
+}

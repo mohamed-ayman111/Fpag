@@ -1,3 +1,5 @@
+
+/*
 body{
   margin: 0;
     font-family: Arial;
@@ -41,4 +43,62 @@ button {
 }
 button:hover {
     background: #5a67d8;
+}
+*/
+
+.carousel {
+    position: relative;
+    width: 100%;
+}
+.cards{
+    display:flex;
+    padding:10px 60px 20px;
+    gap:20px;
+    overflow-x:auto;
+    scroll-behavior: smooth;
+    scrollbar-width:none;
+}
+.cards::-webkit-scrollbar{
+    display:none;
+}
+.scroll-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:10;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.scroll-btn.prev {
+    left: 10px;
+}
+.scroll-btn.next {
+    right: 10px;
+}
+.cards{
+    display:flex;
+    padding:10px 60px 20px;
+    gap:20px;
+    overflow-x:auto;
+}
+.card{
+    flex:0 0 240px;
+    overflow:hidden;
+    border:5px solid #eee;
+    padding:5px;
+    border-radius:12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1)
+}
+.card img{
+    width:100%;
+    height:auto;    
+    object-fit:cover;
+    display:block;
 }

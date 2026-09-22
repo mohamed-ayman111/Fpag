@@ -9,6 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
+    <link rel="stylesheet" href="/css/order-success.css">
 
     <title>Order Successful</title>
 
@@ -26,41 +27,28 @@
 
         <p id="orderId"></p>
 
-        <a href="/main.html">
+        <div class="poss">
+            <a href="/add"
+    id="paymentLink"
+    >
+    Continue to Payment
+</a>
+</div>
+
+        <a href="/">
             Continue Shopping
         </a>
 
         <br>
 
-        <a href="/orders.html">
+        <a href="/orders">
             View My Orders
         </a>
 
     </main>
 
 
-    <script>
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        const orderId =
-            params.get("id");
-
-
-        if (orderId) {
-
-            document.getElementById(
-                "orderId"
-            ).textContent =
-                `Order ID: ${orderId}`;
-
-        }
-
-    </script>
+    <script src="/js/order-success.js"></script>
 
 </body>
 

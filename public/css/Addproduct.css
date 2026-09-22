@@ -1,41 +1,215 @@
-body{
-    display:flex;
-    background:gray ;
-    height:100vh;
-    justify-content:center;
-    align-items:center;
-    color:#fff;
-}
-.input-filed input{
-    background-color: transparent;
-  border: 0;
-  border-bottom: 2px #667eea solid;
-  display: block;
-  width: 150%;
-  padding: 15px 0;
-  font-size: 18px;
-  color: #000;
-}
-.input-filed input:focus{
-    outline:0;
-}
-.poss{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-button{
-        width:100%;
-    padding:12px;
-    background:#4fc3f7;
-    border:none;
-    border-radius:5px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:10px;
-    psition:absolute;
+/* =========================
+   Global
+========================= */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-button:hover{
-    background:#29b6f6;
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+
+/* =========================
+   Main Form Container
+========================= */
+
+.products {
+    width: 100%;
+    max-width: 650px;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================
+   Title
+========================= */
+
+.products h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================
+   Form
+========================= */
+
+.products form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* =========================
+   Input Field
+========================= */
+
+.input-filed {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+.input-filed label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+
+/* =========================
+   Inputs & Select
+========================= */
+
+.input-filed input,
+.input-filed select {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+
+    border: 1px solid #d5d9de;
+    border-radius: 9px;
+
+    background: #fafafa;
+    color: #222;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* Focus */
+
+.input-filed input:focus,
+.input-filed select:focus {
+
+    border-color: #333;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Placeholder */
+
+.input-filed input::placeholder {
+    color: #999;
+}
+
+
+/* =========================
+   Number Input
+========================= */
+
+.input-filed input[type="number"] {
+    appearance: auto;
+}
+
+
+/* =========================
+   Select
+========================= */
+
+.input-filed select {
+    cursor: pointer;
+}
+
+
+/* =========================
+   Submit Area
+========================= */
+
+.poss {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================
+   Submit Button
+========================= */
+
+.poss button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #222;
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.poss button:hover {
+    background: #000;
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+.poss button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 20px 15px;
+    }
+
+    .products {
+        padding: 28px 22px;
+        border-radius: 14px;
+    }
+
+    .products h2 {
+        font-size: 25px;
+    }
+
 }

@@ -9,8 +9,11 @@ const passwordResetSchema = new mongoose.Schema({
     },
 
     email: {
-        type: String,
-        required: true
+        type: String, 
+        required: true, 
+        lowercase: true, 
+        trim: true, 
+        index: true
     },
 
     otpHash: {
@@ -29,8 +32,13 @@ const passwordResetSchema = new mongoose.Schema({
     },
 
     expiresAt: {
-        type: Date,
-        required: true
+        type: Date, 
+        required: true, 
+        index: true
+    },
+    used: { 
+        type: Boolean, 
+        default: false 
     }
 
 }, {

@@ -1,0 +1,259 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f7fb,
+            #e8edf5
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+
+.success-container {
+
+    width: 100%;
+
+    max-width: 520px;
+
+}
+
+
+.success-card {
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 45px 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.10);
+
+    animation:
+        cardAppear 0.5s ease;
+}
+
+
+/* Success icon */
+
+.success-icon {
+
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 42px;
+
+    font-weight: bold;
+}
+
+
+/* Small label */
+
+.success-label {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #6b7280;
+
+    margin-bottom: 10px;
+}
+
+
+/* Heading */
+
+.success-card h1 {
+
+    font-size: 32px;
+
+    color: #111827;
+
+    margin-bottom: 15px;
+}
+
+
+/* Description */
+
+.success-card p {
+
+    color: #6b7280;
+
+    line-height: 1.7;
+
+    font-size: 16px;
+}
+
+
+.success-message {
+
+    margin-top: 5px;
+}
+
+
+/* Buttons */
+
+.success-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    flex-wrap: wrap;
+}
+
+
+.success-actions a {
+
+    text-decoration: none;
+
+    padding: 12px 22px;
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.primary-btn {
+
+    background: #111827;
+
+    color: white;
+}
+
+
+.primary-btn:hover {
+
+    background: #000000;
+
+    transform: translateY(-2px);
+}
+
+
+.secondary-btn {
+
+    background: #f3f4f6;
+
+    color: #111827;
+}
+
+
+.secondary-btn:hover {
+
+    background: #e5e7eb;
+
+    transform: translateY(-2px);
+}
+
+
+/* Animation */
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .success-card {
+
+        padding: 35px 22px;
+
+    }
+
+
+    .success-card h1 {
+
+        font-size: 26px;
+
+    }
+
+
+    .success-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .success-actions a {
+
+        width: 100%;
+
+    }
+
+}
+

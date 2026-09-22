@@ -218,3 +218,49 @@ body {
     }
 
 }
+.payment-method {
+    margin: 25px 0;
+}
+
+.payment-method h2 {
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px 18px;
+    margin-bottom: 12px;
+
+    border: 2px solid #ddd;
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.2s ease;
+}
+
+.payment-option:hover {
+    transform: translateY(-2px);
+    border-color: #667eea;
+    background: #f5f7ff;
+}
+
+.payment-option input {
+    width: 18px;
+    height: 18px;
+
+    accent-color: #667eea;
+}
+
+.payment-option span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}

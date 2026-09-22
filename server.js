@@ -21,14 +21,18 @@ const config = {
     port : env.PORT || 3000 ,
     host : env.HOSTNAME
 }
-const hostname = config.host || '127.0.0.1' ;
+const hostname = config.host || '0.0.0.0' ;
 const port = config.port || 3000 ;
 //static files
 //app.use('/css',express.static(path.join(__dirname,'public')));
 //app.use('/images',express.static(path.join(__dirname,'public')));
-/*app.use((req,res,next) => {
+
+/*
+app.use((req,res,next) => {
     console.log(req.method, req.url);next()
-});*/
+});
+*/
+
 app.use(express.json());
 
 app.use(express.urlencoded({
@@ -46,10 +50,14 @@ mongoose.connect(config.mon)
 .catch(err =>{console.log("DB error :",err);
     process.exit(1);
 });
-/*/pages
+
+/*
+/pages
 app.get('/',(req,res) => {
     res.sendFile(path.join(__dirname,'views','main.html'));
-});*/
+});
+*/
+
 function sendpage(req,res,next,filename) {
     const filepath = path.join(__dirname,'views',filename);
     res.sendFile(filepath,(err) => {
@@ -62,7 +70,20 @@ function sendpage(req,res,next,filename) {
 /*app.get('/error',(req,res,next) => {
     throw new Error("Test server Error");
 });*/
+
 app.use(helmet());
+
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                "upgrade-insecure-requests": null
+            }
+        }
+    })
+);
+
+
 app.use(session({
     name : 'sid' ,
     secret : process.env.SESSION_SECRET ,
@@ -79,6 +100,7 @@ app.use(session({
         sameSite : 'lax'
     }
 }));
+
 function isAuth(req,res,next){
     if (!req.session.userId){
         return res.status(401).redirect('/login');        
@@ -104,9 +126,7 @@ async function isAdmin (req,res,next){
         }
 
         if (user.role !== "admin") {
-            return res.status(403).json({
-                message: "Admin access required"
-            });
+            return res.status(403).sendFile(path.join(__dirname,'views','403.html'));
         }
 
         req.user = user;
@@ -129,19 +149,46 @@ function isGuest(req,res,next){
     }
     next();
 }
-app.get('/', (req,res,next) => sendpage(req,res,next,'main.html'));
+function requirePasswordResetVerification(req, res, next) {
+
+    if (
+        !req.session.passwordResetVerified ||
+        !req.session.passwordResetUserId
+    ) {
+        return res.redirect("/respass.html");
+    }
+
+    next();
+}
+
+app.get('/',/*isGuest,*/(req,res,next) => sendpage(req,res,next,'main.html'));
 app.get('/about',/*isGuest,*/(req,res,next) => sendpage(req,res,next,'about.html'));
-app.get('/login', /*isGuest,*/ (req,res,next) => sendpage(req,res,next,'login.html'));
+app.get('/PRELIMINARYPAGES',/*isGuest,*/(req,res,next) => sendpage(req,res,next,'PRELIMINARYPAGES.html'));
+app.get('/login',/*isGuest,*/(req,res,next) => sendpage(req,res,next,'login.html'));
 app.get('/register',isGuest,(req,res,next) => sendpage(req,res,next,'register.html'));
+app.get('/registration-success',isGuest,(req,res,next) => sendpage(req,res,next,'registration-success.html'));
 app.get('/respass',isGuest,(req,res,next) => sendpage(req,res,next,'respass.html'));
+app.get('/verify-otp',isGuest,(req,res,next) => sendpage(req,res,next,'verify-otp.html'));
+app.get('/reset-password',requirePasswordResetVerification,(req,res,next) => sendpage(req,res,next,'reset-password.html'));
 app.get('/dashboard' ,isAdmin, (req,res,next) => sendpage(req,res,next,'dashboard.html'));
 app.get('/cart' ,isAuth, (req,res,next) => sendpage(req,res,next,'cart.html'));
 app.get('/checkout' ,isAuth, (req,res,next) => sendpage(req,res,next,'checkout.html'));
-app.get('/admin' , isAdmin,isAuth, (req,res) =>{
+app.get('/order-success' ,isAuth, (req,res,next) => sendpage(req,res,next,'order-success.html'));
+app.get('/payment' ,isAuth, (req,res,next) => sendpage(req,res,next,'payment.html'));
+app.get('/payment-test' ,isAuth, (req,res,next) => sendpage(req,res,next,'payment-test.html'));
+app.get('/payment-success' ,isAuth, (req,res,next) => sendpage(req,res,next,'payment-success.html'));
+app.get('/payment-failed' ,isAuth, (req,res,next) => sendpage(req,res,next,'payment-failed.html'));
+app.get('/payment-cancelled' ,isAuth, (req,res,next) => sendpage(req,res,next,'payment-cancelled.html'));
+app.get('/orders' ,isAuth, (req,res,next) => sendpage(req,res,next,'orders.html'));
+app.get('/order-details' ,isAuth, (req,res,next) => sendpage(req,res,next,'order-details.html'));
+app.get('/admin-orders' ,isAdmin, (req,res,next) => sendpage(req,res,next,'admin-orders.html'));
+app.get('/admin-order-details' ,isAdmin, (req,res,next) => sendpage(req,res,next,'admin-order-details.html'));
+app.get('/Addproduct',isAdmin,(req,res,next) => sendpage(req,res,next,'Addproduct.html'));
+app.get('/admin' , isAdmin, (req,res) =>{
     res.send("Welcome admin.");
 });
 app.get('/Products', isAuth,(req,res,next) => sendpage(req,res,next,'Addproduct.html'));
-app.get('/check',(req,res)=>{
+app.get('/check',isAdmin,(req,res)=>{
     console.log(req.session);
     if (req.session.userId) {
         res.send("User logged in.");
@@ -202,15 +249,6 @@ app.use((req, res ,next) => {
     next();
 });
 
-app.get('/', (req,res,next) => sendpage(req,res,next,'main.html'));
-app.get('/about',(req,res,next) => sendpage(req,res,next,'about.html'));
-app.get('/login',(req,res,next) =>{ console.log("LOGIN ROUTE WORKING");sendpage(req,res,next,'login.html')});
-app.get('/register',(req,res,next) =>sendpage(req,res,next,'register.html'));
-app.get('/respass',(req,res,next) => sendpage(req,res,next,'respass.html'));
-app.get('/test',(req,res,next) => sendpage(req,res,next,'test.html'));
-app.get('/Products',(req,res,next) => sendpage(req,res,next,'Addproduct.html'));
-
-
 app.use(express.urlencoded({extended:true}));
 
 //Process product enrollment
@@ -229,8 +267,8 @@ app.post('/Products',async(req,res)=>{
         });
         await newproduct.save();
         console.log("Product enrollment saved.");
-        return res.status(200).send(`Data update ok.`);
-    }catch (error) {
+        return res.status(200).redirect('/dashboard'); //send(`Data update ok.`);
+    } catch (error) {
 
         console.error(error);
 
@@ -341,6 +379,7 @@ app.get(
 
     }
 );
+
 /*
 app.use(express.json());
 
@@ -348,6 +387,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 */
+
 app.patch(
     "/api/products/:id",
     isAdmin,
@@ -456,6 +496,30 @@ const orderRoutes =
     app.use(
     "/api/orders",
     orderRoutes
+);
+
+//Admin dashboard router
+const adminRoutes =
+    require("./routes/adminRoutes");
+    app.use(
+    "/api/admin",
+    adminRoutes
+);
+
+//Payment routes
+const paymentRoutes =
+    require("./routes/paymentRoutes");
+app.use(
+    "/api/payments",
+    paymentRoutes
+);
+
+//Passrest router
+const PassresetRoutes =
+    require("./routes/PassresetRoutes");
+    app.use(
+    "/",
+    PassresetRoutes
 );
 
 /*
@@ -575,91 +639,7 @@ app.post("/api/orders", async (req, res) => {
 
 });
 */
-//respass post.
-const crypto = require("crypto");
- const User = require("./models/user");
- const PasswordReset = require("./models/passwordreset");
- const { sendOTPEmail } = require("./services/emailService");
-app.post('/respass',async(req,res)=>{
-    try{
-    console.log(`Reset email:`,req.body);
-    const {email} = req.body;
-    const cleanemail = email.trim().toLowerCase();
-    const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!cleanemail){
-        return res.status(400).send("Email is require.");
-    }
-    if (!emailpattern.test(cleanemail)){
-        return res.status(400).send("Invild email.");
-    }
-//Check if the email exists
-    const Searchuser = await User.findOne({ email: cleanemail });
-//    
-if ( !Searchuser ){
-        console.log("Email not found.");
-        return res.status(200).send("If an account with that email exists, we have sent a verification code.");
-    }
-        console.log("Email exists.");
 
-        //Delete previous otp
-        await PasswordReset.deleteMany({
-    userId: Searchuser._id
-});
-
-        //Generate the OTP
-const otp = crypto
-            .randomInt(100000, 1000000)
-            .toString();
-            console.log("OTP generated.");
-
-            //Hash the OTP
-const otpHash = await bcrypt.hash(otp, 10);
-
-//Calculate expiration
-const ExpiresAt = new Date(
-    Date.now() + 5 * 60 * 1000
-);
-
-//Create passwordreset document
-const reset = new PasswordReset({
-    userId: Searchuser._id,
-
-    email: Searchuser.email,
-
-    otpHash: otpHash,
-
-    expiresAt : ExpiresAt
-
-});
-
-//Save to MongoDB
-await reset.save();
-console.log("OTP information saved.");
-
-//
-
-const transporter = require("./config/mail");
-
-transporter.verify()
-    .then(() => {
-        console.log("SMTP connection successful.");
-    })
-    .catch((err) => {
-        console.error("SMTP connection failed:", err);
-    });
-//Send otp to email
-await sendOTPEmail(
-            Searchuser.email,
-            otp
-        );
-        console.log("OTP email sent.");
-    return res.status(200).send(`If an account with that email exists, we have sent a verification code.`);
-    }catch(err){
-    console.error("Password reset error:",err);
-
-    res.status(500).send("Server Error");
-    }
-});
 //login post.
 app.post('/login', async (req,res) => {
     try{
@@ -684,12 +664,12 @@ app.post('/login', async (req,res) => {
     req.session.userId = user._id;
         req.session.role = user.role;
 
-        res.redirect("/");
+       return res.redirect("/");
     //res.status(200).send(`Welcome ${user.username}`)
-    res.status(200).send(`Welcome ${user.username}.`);
+    //res.status(200).send(`Welcome ${user.username}.`);
 } catch (err){
     console.error(err);
-    res.Status(500).send("Server error.");
+    res.status(500).send("Server error.");
 } });
 //Secere from brute foce.
 const loginlimiter = rateLimit({
@@ -698,7 +678,7 @@ const loginlimiter = rateLimit({
 });
 app.use('/login', loginlimiter);
 //Registration form proccessing.
-//const User = require("./models/user");
+const User = require("./models/user");
 const bcrypt = require("bcrypt");
 app.post('/register', async (req,res)=>{
     try {
@@ -749,7 +729,7 @@ console.log(`saved user:`,{
 });
 //Save the user on db.
 await newUser.save();
-res.status(200).send(`Welcome ${cleanusername} registred successfly.`);
+res.redirect("/registration-success");
  } catch (err) {
     console.error(err);
     res.status(500).send("Server error");

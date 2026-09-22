@@ -1,63 +1,119 @@
-async function loadDashboardProducts() {
+async function loadDashboard() {
 
     try {
 
         const response =
-            await fetch("/api/products");
+            await fetch(
+                "/api/admin/dashboard"
+            );
+
+
+        const data =
+            await response.json();
 
 
         if (!response.ok) {
 
             throw new Error(
-                "Failed to fetch products"
+                data.message ||
+                "Failed to load dashboard."
             );
 
         }
 
 
-        const products =
-            await response.json();
+        const stats =
+            data.statistics;
 
 
-        const groups =
-            groupByCategory(products);
+        /*
+        ============================
+        Products
+        ============================
+        */
+
+        document.getElementById(
+            "totalProducts"
+        ).textContent =
+            stats.products.total;
 
 
-        const container =
-            document.getElementById(
-                "productsContainer"
-            );
+        document.getElementById(
+            "lowStock"
+        ).textContent =
+            stats.products.lowStock;
 
 
-        container.innerHTML = "";
+        document.getElementById(
+            "outOfStock"
+        ).textContent =
+            stats.products.outOfStock;
 
 
-        Object.entries(groups).forEach(
-            function ([category, products]) {
+        /*
+        ============================
+        Orders
+        ============================
+        */
 
-                const section =
-                    createCategorySection(
-                        category,
-                        products,
-                        true
-                    );
+        document.getElementById(
+            "totalOrders"
+        ).textContent =
+            stats.orders.total;
 
 
-                container.appendChild(section);
+        document.getElementById(
+            "pendingOrders"
+        ).textContent =
+            stats.orders.pending;
 
-            }
-        );
+
+        document.getElementById(
+            "processingOrders"
+        ).textContent =
+            stats.orders.processing;
+
+
+        document.getElementById(
+            "shippedOrders"
+        ).textContent =
+            stats.orders.shipped;
+
+
+        document.getElementById(
+            "deliveredOrders"
+        ).textContent =
+            stats.orders.delivered;
+
+
+        /*
+        ============================
+        Sales
+        ============================
+        */
+
+        document.getElementById(
+            "totalSales"
+        ).textContent =
+            `₹${stats.sales.total}`;
 
 
     } catch (error) {
 
         console.error(
-            "Error loading dashboard products:",
+            "Dashboard error:",
             error
         );
 
+
+        alert(
+            error.message ||
+            "Failed to load dashboard."
+        );
+
     }
+
 }
 
 
-loadDashboardProducts();
+loadDashboard();

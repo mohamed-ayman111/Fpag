@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Test Payment</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/payment-test.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="test-payment-container">
+
+        <div class="test-payment-card">
+
+            <div class="test-badge">
+                TEST MODE
+            </div>
+
+
+            <h1>
+                Secure Test Payment
+            </h1>
+
+
+            <p id="paymentMessage">
+                Loading payment...
+            </p>
+
+
+            <div class="payment-details">
+
+                <div class="detail-row">
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong id="orderId">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Amount
+                    </span>
+
+                    <strong id="amount">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Payment Method
+                    </span>
+
+                    <strong>
+                        Online
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Payment Status
+                    </span>
+
+                    <strong id="status">
+                        Processing
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="paymentError"
+                class="payment-error"
+            ></div>
+
+
+            <div class="payment-actions">
+
+                <button
+                    type="button"
+                    id="payButton"
+                >
+                    Pay ₹0
+                </button>
+
+
+                <button
+                    type="button"
+                    id="failButton"
+                    class="fail-button"
+                >
+                    Simulate Failed Payment
+                </button>
+
+
+                <button
+                    type="button"
+                    id="cancelButton"
+                    class="cancel-button"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+
+            <p class="test-warning">
+
+                This is a local test payment environment.
+                No real money will be charged.
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script
+        src="/js/payment-test.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

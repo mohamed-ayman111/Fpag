@@ -1,0 +1,576 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    color: #222;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.payment-container {
+
+    width: 100%;
+
+    max-width: 560px;
+
+}
+
+
+/* =========================================
+   PAYMENT CARD
+========================================= */
+
+.payment-card {
+
+    background: #ffffff;
+
+    width: 100%;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.25);
+
+    animation:
+        paymentCardIn
+        0.6s ease;
+
+}
+
+
+/* Card animation */
+
+@keyframes paymentCardIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.payment-card h1 {
+
+    text-align: center;
+
+    font-size: 32px;
+
+    margin-bottom: 12px;
+
+    color: #333;
+
+}
+
+
+/* =========================================
+   MAIN MESSAGE
+========================================= */
+
+#paymentMessage {
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 15px;
+
+    margin-bottom: 25px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   PAYMENT INFORMATION
+========================================= */
+
+.payment-info {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8f9ff,
+            #eef1ff
+        );
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    margin-bottom: 22px;
+
+    border: 1px solid #e3e7ff;
+
+}
+
+
+/* Information row */
+
+.payment-info p {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #ddd;
+
+    font-size: 15px;
+
+}
+
+
+/* Remove last border */
+
+.payment-info p:last-child {
+
+    border-bottom: none;
+
+}
+
+
+/* Labels */
+
+.payment-info span {
+
+    color: #777;
+
+    font-weight: 500;
+
+}
+
+
+/* Values */
+
+.payment-info strong {
+
+    color: #333;
+
+    text-align: right;
+
+    word-break: break-all;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+#status {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #fff3cd;
+
+    color: #856404;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================
+   COD MESSAGE
+========================================= */
+
+.cod-message {
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f8ee,
+            #dff5e8
+        );
+
+    border:
+        1px solid #b8e5c8;
+
+    color: #216e39;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    margin-bottom: 22px;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   ONLINE PAYMENT
+========================================= */
+
+.online-payment {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f1ff,
+            #eee9ff
+        );
+
+    border:
+        1px solid #d8d0ff;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+
+    text-align: center;
+
+    animation:
+        onlinePaymentIn
+        0.4s ease;
+
+}
+
+
+@keyframes onlinePaymentIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* Online title */
+
+.online-payment h2 {
+
+    color: #4b3f8f;
+
+    margin-bottom: 10px;
+
+    font-size: 22px;
+
+}
+
+
+/* Online description */
+
+.online-payment p {
+
+    color: #666;
+
+    line-height: 1.5;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================
+   PAY BUTTON
+========================================= */
+
+#payButton {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 14px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+/* Hover */
+
+#payButton:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(102, 126, 234, 0.35);
+
+}
+
+
+/* Active */
+
+#payButton:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* Disabled */
+
+#payButton:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.65;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+
+/* =========================================
+   PAYMENT ERROR
+========================================= */
+
+.payment-error {
+
+    min-height: 20px;
+
+    margin: 10px 0 18px;
+
+    padding: 0 5px;
+
+    color: #dc3545;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+.payment-links {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #eee;
+
+}
+
+
+/* Link */
+
+.payment-links a {
+
+    text-decoration: none;
+
+    color: #667eea;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease;
+
+}
+
+
+/* Link hover */
+
+.payment-links a:hover {
+
+    color: #764ba2;
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================
+   HIDDEN ELEMENT
+========================================= */
+
+[hidden] {
+
+    display: none !important;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 15px;
+
+    }
+
+
+    .payment-card {
+
+        padding: 25px 20px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .payment-card h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .payment-info p {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .payment-info strong {
+
+        text-align: left;
+
+        width: 100%;
+
+    }
+
+
+    .payment-links {
+
+        flex-direction: column;
+
+        gap: 14px;
+
+    }
+
+}

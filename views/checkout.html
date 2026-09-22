@@ -30,7 +30,7 @@
 
                 <h2>Customer Information</h2>
 
-                <form id="checkoutForm">
+                <form id="checkoutForm" novalidate>
 
                     <div class="form-group">
 
@@ -148,6 +148,42 @@
                         ></textarea>
 
                     </div>
+
+                    <div class="payment-method">
+
+    <h2>Payment Method</h2>
+
+    <label class="payment-option">
+
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="COD"
+            checked
+        >
+
+        <span>
+            💵 Cash on Delivery
+        </span>
+
+    </label>
+
+
+    <label class="payment-option">
+
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="Online"
+        >
+
+        <span>
+            💳 Online Payment
+        </span>
+
+    </label>
+
+</div>
 
 
                     <button

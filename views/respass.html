@@ -14,13 +14,18 @@
 Enter your user account's verified email address and we will send you a password reset link.
 
 </p>
-<form action="/respass" method="POST" name="respass" novalidate>
+<form name="respass" id="respassForm" novalidate>
 <div class="field">
 <label for="email">Email</label>
-<input type="email" name="email" placeholder="Enter your email address">
+<input type="email"
+        id="email"
+        name="email"
+        required
+        autocomplete="email" placeholder="Enter your email address">
 </div>
 <h2>Verify your account</h2>
 <button type="submit">Send password reset email</button>
+<p id="respassMessage" class="message"></p>
     </form>
 </div>
 <script src="/js/respass.js" ></script>

@@ -1,0 +1,397 @@
+/* ================================
+   GENERAL DOCUMENT SETTINGS
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #e9ecef;
+    color: #222;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   A4 PAGE
+================================ */
+
+.page {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 20px auto;
+    padding: 25mm 22mm;
+
+    background: white;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+    position: relative;
+}
+
+
+/* ================================
+   PAGE BORDER
+================================ */
+
+.page::before {
+    content: "";
+
+    position: absolute;
+
+    top: 12mm;
+    left: 12mm;
+    right: 12mm;
+    bottom: 12mm;
+
+    border: 1.5px solid #222;
+
+    pointer-events: none;
+}
+
+
+/* ================================
+   COVER PAGE
+================================ */
+
+.cover-page {
+    min-height: 297mm;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30mm;
+}
+
+.cover-page h1 {
+    font-size: 30pt;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.cover-page h2 {
+    font-size: 20pt;
+    margin-top: 0;
+}
+
+.cover-page h3 {
+    font-size: 15pt;
+    font-weight: normal;
+}
+
+.cover-page .degree {
+    font-weight: bold;
+    font-size: 17pt;
+    margin: 20px 0;
+}
+
+.cover-page .student {
+    margin-top: 20px;
+    font-size: 15pt;
+}
+
+.cover-page .academic-year {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+
+/* ================================
+   HEADINGS
+================================ */
+
+h1 {
+    text-align: center;
+
+    font-size: 22pt;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 25px;
+
+    color: #111;
+}
+
+h2 {
+    text-align: center;
+
+    font-size: 18pt;
+
+    margin: 20px 0;
+}
+
+h3 {
+    font-size: 15pt;
+
+    margin-top: 25px;
+}
+
+
+/* ================================
+   PARAGRAPHS
+================================ */
+
+p {
+    text-align: justify;
+
+    margin: 0 0 15px 0;
+}
+
+
+/* ================================
+   IMPORTANT INFORMATION
+================================ */
+
+.project-title {
+    text-align: center;
+
+    font-size: 17pt;
+
+    font-weight: bold;
+
+    margin: 25px 0;
+}
+
+.center {
+    text-align: center;
+}
+
+
+/* ================================
+   INFORMATION TABLE
+================================ */
+
+.project-info {
+    width: 85%;
+
+    margin: 30px auto;
+
+    border-collapse: collapse;
+}
+
+.project-info td {
+    border: 1px solid #555;
+
+    padding: 10px 14px;
+}
+
+.project-info td:first-child {
+    width: 35%;
+
+    font-weight: bold;
+
+    background: #f2f2f2;
+}
+
+
+/* ================================
+   SIGNATURE SECTION
+================================ */
+
+.signature-section {
+    margin-top: 45px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.signature-box {
+    width: 30%;
+
+    text-align: center;
+
+    line-height: 1.5;
+}
+
+.signature-line {
+    border-top: 1px solid #222;
+
+    margin-top: 45px;
+
+    padding-top: 5px;
+}
+
+
+/* ================================
+   DECLARATION / CERTIFICATE
+================================ */
+
+.document-title {
+    text-align: center;
+
+    font-size: 22pt;
+
+    font-weight: bold;
+
+    margin-bottom: 35px;
+
+    text-transform: uppercase;
+}
+
+.quote-title {
+    text-align: center;
+
+    font-size: 15pt;
+
+    font-weight: bold;
+
+    margin: 20px 0;
+}
+
+
+/* ================================
+   ACKNOWLEDGEMENT
+================================ */
+
+.acknowledgement p {
+    text-indent: 40px;
+}
+
+
+/* ================================
+   ABSTRACT
+================================ */
+
+.abstract p {
+    text-indent: 40px;
+}
+
+.keywords {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border-left: 4px solid #222;
+
+    background: #f5f5f5;
+}
+
+
+/* ================================
+   PAGE FOOTER
+================================ */
+
+.page-number {
+    position: absolute;
+
+    bottom: 15mm;
+
+    left: 0;
+    right: 0;
+
+    text-align: center;
+
+    font-size: 10pt;
+}
+
+
+/* ================================
+   PAGE BREAK
+================================ */
+
+.page-break {
+    page-break-after: always;
+}
+
+
+/* ================================
+   PRINT SETTINGS
+================================ */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+
+        margin: 0;
+
+        padding: 25mm 22mm;
+
+        box-shadow: none;
+
+        page-break-after: always;
+    }
+
+    .page::before {
+        display: block;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
+}
+
+
+/* ================================
+   SCREEN RESPONSIVE
+================================ */
+
+@media screen and (max-width: 800px) {
+
+    body {
+        background: white;
+    }
+
+    .page {
+        width: 100%;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 30px 25px;
+
+        box-shadow: none;
+    }
+
+    .page::before {
+        display: none;
+    }
+
+    .signature-section {
+        flex-direction: column;
+    }
+
+    .signature-box {
+        width: 100%;
+    }
+
+    .cover-page {
+        min-height: 90vh;
+
+        padding: 30px 15px;
+    }
+
+    .cover-page h1 {
+        font-size: 24pt;
+    }
+
+    .cover-page h2 {
+        font-size: 17pt;
+    }
+}

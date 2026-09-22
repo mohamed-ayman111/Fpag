@@ -1,0 +1,388 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    color: #222;
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.payment-result-container {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.result-card {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: #fff;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.25);
+
+    animation:
+        resultAppear 0.6s ease;
+}
+
+
+/* ========================================
+   ICON
+======================================== */
+
+.result-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 40px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   FAILED ICON
+======================================== */
+
+.failed-icon {
+
+    background: #ffe5e5;
+
+    color: #e74c3c;
+}
+
+
+/* ========================================
+   CANCELLED ICON
+======================================== */
+
+.cancelled-icon {
+
+    background: #eeeeee;
+
+    color: #555;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.result-card h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 12px;
+
+    color: #222;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+.result-card > p {
+
+    color: #666;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   INFORMATION
+======================================== */
+
+.result-info {
+
+    background: #f7f8fc;
+
+    border: 1px solid #e5e7ef;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.result-info p {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #e5e7ef;
+}
+
+
+.result-info p:last-child {
+
+    border-bottom: none;
+}
+
+
+.result-info span {
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+.result-info strong {
+
+    color: #333;
+
+    font-size: 14px;
+
+    word-break: break-all;
+}
+
+
+/* ========================================
+   FAILED STATUS
+======================================== */
+
+.failed-card .result-info strong {
+
+    color: #e74c3c;
+}
+
+
+/* ========================================
+   CANCELLED STATUS
+======================================== */
+
+.cancelled-card .result-info strong {
+
+    color: #777;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.result-actions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.result-actions a {
+
+    display: block;
+
+    padding: 13px 18px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* ========================================
+   FIRST BUTTON
+======================================== */
+
+#retryPayment {
+
+    background: #4fc3f7;
+
+    color: white;
+}
+
+
+#retryPayment:hover {
+
+    background: #29b6f6;
+
+    transform: translateY(-2px);
+}
+
+
+#returnPayment {
+
+    background: #667eea;
+
+    color: white;
+}
+
+
+#returnPayment:hover {
+
+    background: #5568d9;
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   OTHER LINKS
+======================================== */
+
+.result-actions a:not(:first-child) {
+
+    background: #f1f3f5;
+
+    color: #444;
+}
+
+
+.result-actions a:not(:first-child):hover {
+
+    background: #e2e5e9;
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes resultAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 550px) {
+
+    .result-card {
+
+        padding: 28px 20px;
+
+        border-radius: 16px;
+    }
+
+
+    .result-card h1 {
+
+        font-size: 24px;
+    }
+
+
+    .result-info p {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+}

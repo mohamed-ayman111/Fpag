@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="referrer"
+        content="no-referrer"
+    >
+
+    <title>Verify OTP</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/verify-otp.css"
+    >
+</head>
+
+<body>
+
+    <main class="otp-container">
+
+        <section class="otp-card">
+
+            <h1>Verify Your Email</h1>
+
+            <p>
+                Enter the 6-digit verification code
+                sent to your email.
+            </p>
+
+            <form id="otpForm">
+
+                <label for="otp">
+                    Verification Code
+                </label>
+
+                <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="6"
+                    pattern="[0-9]{6}"
+                    required
+                >
+
+                <button type="submit">
+                    Verify OTP
+                </button>
+
+            </form>
+
+            <p
+                id="otpMessage"
+                class="message"
+            ></p>
+
+            <button
+                type="button"
+                id="resendButton"
+            >
+                Resend Code
+            </button>
+
+        </section>
+
+    </main>
+
+    <script
+        src="/js/verify-otp.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

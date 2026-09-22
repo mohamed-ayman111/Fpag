@@ -19,6 +19,7 @@ function addToCart(product) {
         cart.push({
             _id: product._id,
             name: product.name,
+            category: product.category,
             price: product.price,
             image: product.image,
             quantity: 1
@@ -244,10 +245,25 @@ function displayCart() {
 
     const groups = {};
 
-
     cart.forEach(function (product) {
 
         const category = product.category || "Other";
+        if (!groups[category]) {
+
+            groups[category] = [];
+
+        }
+
+        groups[category].push(product);
+
+    });
+/*
+    const groups = {};
+
+
+    cart.forEach(function (product) {
+
+        const category = product.category ;
 
         if (!groups[category]) {
 
@@ -257,6 +273,7 @@ function displayCart() {
         groups[category].push(product);
 
     });
+    */
 
 
     // Create a row for every category

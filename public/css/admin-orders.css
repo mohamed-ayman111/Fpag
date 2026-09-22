@@ -1,0 +1,143 @@
+* {
+     margin: 0;
+      padding: 0;
+       box-sizing: border-box;
+     }
+body {
+     font-family: Arial, sans-serif;
+      background: #f7f7f7;
+       color: #222;
+     }
+.container {
+     width: 90%;
+      max-width: 1200px;
+       margin: auto;
+     }
+.site-header {
+     position: sticky;
+      top: 0;
+       z-index: 1000;
+        background: rgba(255,255,255,.92);
+         backdrop-filter: blur(12px);
+          border-bottom: 1px solid #e5e5e5;
+         }
+.header-container {
+     min-height: 70px;
+      display: flex;
+       align-items: center;
+        justify-content: space-between;
+     } 
+.logo {
+     text-decoration: none;
+      color: #111;
+       font-size: 28px;
+        font-weight: 800;
+     }
+.navbar {
+     display: flex;
+      gap: 25px;
+     }
+.navbar a {
+     text-decoration: none;
+      color: #333;
+       font-weight: 600;
+     }
+.navbar a:hover, .navbar a.active {
+     color: #000;
+     }
+.admin-orders-container {
+     width: 90%;
+      max-width: 1200px;
+       margin: 50px auto;
+     }
+.eyebrow {
+     font-size: 12px;
+      font-weight: bold;
+       letter-spacing: 2px;
+        color: #777;
+     }
+.page-header h1 {
+     margin: 8px 0;
+      font-size: 34px;
+     }
+.page-header p {
+     color: #666;
+     }
+.orders-grid {
+     display: grid;
+      grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+       gap: 22px;
+        margin-top: 35px;
+     }
+.admin-order-card {
+     padding: 25px;
+      background: #fff;
+       border: 1px solid #e5e5e5;
+        border-radius: 16px;
+         box-shadow: 0 5px 20px rgba(0,0,0,.05);
+         }
+.admin-order-card h2 {
+     margin-bottom: 18px;
+      font-size: 17px;
+       word-break: break-all;
+     }
+.admin-order-card p {
+     margin-bottom: 8px;
+      color: #666;
+       font-size: 14px;
+     }
+.admin-order-card strong {
+     display: block;
+      margin: 15px 0;
+       font-size: 18px;
+     }
+.admin-order-card label {
+     display: block;
+      margin-top: 15px;
+       margin-bottom: 6px;
+        font-size: 13px;
+         font-weight: bold;
+          color: #555;
+         }
+.admin-order-card select {
+     width: 100%;
+      padding: 11px 12px;
+       border: 1px solid #ddd;
+        border-radius: 9px;
+         background: #fff;
+          font-size: 14px;
+           cursor: pointer;
+         }
+.details-btn {
+     display: inline-block;
+      margin-top: 20px;
+       padding: 10px 17px;
+        border-radius: 9px;
+         background: #111;
+          color: #fff;
+           text-decoration: none;
+            font-size: 13px;
+             font-weight: 600;
+             }
+.details-btn:hover {
+     background: #333;
+     }
+      @media (max-width: 600px) {
+.header-container {
+     flex-direction: column;
+      padding: 15px 0;
+       gap: 15px;
+     }
+.navbar {
+     gap: 14px;
+      flex-wrap: wrap;
+       justify-content: center;
+     }
+.admin-orders-container {
+     width: 92%;
+      margin-top: 30px;
+     }
+.page-header h1 {
+     font-size: 27px;
+     }
+     }

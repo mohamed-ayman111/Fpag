@@ -1,0 +1,447 @@
+/* ================================
+   Global
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    color: #222;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* ================================
+   Header
+================================ */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+
+.header-container {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* ================================
+   Logo
+================================ */
+
+.logo {
+    text-decoration: none;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    color: #111;
+
+    letter-spacing: -1px;
+}
+
+
+/* ================================
+   Navbar
+================================ */
+
+.navbar {
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+.navbar a {
+    position: relative;
+
+    text-decoration: none;
+
+    color: #333;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    padding: 8px 2px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.navbar a:hover {
+    color: #000;
+
+    transform: translateY(-1px);
+}
+
+
+/* Underline animation */
+
+.navbar a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: #111;
+
+    transition: width 0.25s ease;
+}
+
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+
+/* Active page */
+
+.navbar a[href="/orders"] {
+    color: #000;
+}
+
+.navbar a[href="/orders"]::after {
+    width: 100%;
+}
+
+
+/* ================================
+   Orders Main
+================================ */
+
+.orders-container {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 50px auto;
+
+    padding-bottom: 60px;
+}
+
+
+.orders-container > h1 {
+    font-size: 34px;
+
+    margin-bottom: 30px;
+
+    color: #111;
+}
+
+
+/* ================================
+   Orders Container
+================================ */
+
+#ordersContainer {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* ================================
+   Order Card
+================================ */
+
+.order-card {
+    background: #fff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        auto
+        auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.order-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================================
+   Order ID
+================================ */
+
+.order-card h3 {
+    font-size: 16px;
+
+    color: #111;
+
+    word-break: break-all;
+}
+
+
+/* ================================
+   Order Information
+================================ */
+
+.order-card p {
+    font-size: 14px;
+
+    color: #666;
+
+    line-height: 1.5;
+}
+
+
+/* ================================
+   Total
+================================ */
+
+.order-card strong {
+    font-size: 16px;
+
+    color: #111;
+
+    white-space: nowrap;
+}
+
+
+/* ================================
+   Status
+================================ */
+
+.order-status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 95px;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    background: #f1f1f1;
+
+    color: #333;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+
+    white-space: nowrap;
+}
+
+
+/* ================================
+   View Order Button
+================================ */
+
+.order-card button {
+    border: none;
+
+    background: #111;
+
+    color: #fff;
+
+    padding: 10px 17px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.order-card button:hover {
+    background: #333;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.order-card button:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   Loading / Empty Message
+================================ */
+
+#ordersContainer > p {
+    background: #fff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 14px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: #666;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 850px) {
+
+    .header-container {
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding: 15px 0;
+
+        gap: 12px;
+    }
+
+
+    .navbar {
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .order-card {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 15px;
+    }
+
+
+    .order-card h3 {
+        grid-column: 1 / -1;
+    }
+
+
+    .order-card button {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .orders-container {
+        width: 92%;
+
+        margin-top: 35px;
+    }
+
+
+    .orders-container > h1 {
+        font-size: 28px;
+
+        margin-bottom: 22px;
+    }
+
+
+    .navbar {
+        gap: 12px;
+    }
+
+
+    .navbar a {
+        font-size: 14px;
+    }
+
+
+    .order-card {
+        grid-template-columns: 1fr;
+
+        padding: 20px;
+    }
+
+
+    .order-card h3 {
+        grid-column: auto;
+    }
+
+
+    .order-card p,
+    .order-card strong {
+        font-size: 14px;
+    }
+
+
+    .order-status {
+        width: fit-content;
+    }
+}
+

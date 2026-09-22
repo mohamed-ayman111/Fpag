@@ -199,15 +199,16 @@ function createHeader() {
                     else if ( currentUser.role === "user" ) {
                           addNavigationLink( nav, "About", "/about" );
                            addNavigationLink( nav, "Cart", "/cart" );
-                            addNavigationLink( nav, "Checkout", "/checkout" );
                              addNavigationLink( nav, "Orders", "/orders" );
                              } 
                              // ========================= 
                              // // Admin 
                              // // ========================= 
-                             else if ( currentUser.role === "admin" ) { 
-                                 addNavigationLink( nav, "Products", "/dashboard" );
+                             else if ( currentUser.role === "admin" ) {
+                                addNavigationLink( nav, "Cart", "/cart" );
+                            addNavigationLink( nav, "Checkout", "/checkout" ); 
                                   addNavigationLink( nav, "Orders", "/orders" );
+                                  addNavigationLink( nav, "dashboard", "/dashboard" );
                                  } 
                                  header.appendChild(nav);
                                   // ========================= 
@@ -260,21 +261,21 @@ function createLandingPage() {
         document.createElement("h1");
 
     title.textContent =
-        "Welcome to Our Shoe Store";
+        "Welcome to Our Services  Store";
 
 
     const paragraph1 =
         document.createElement("p");
 
     paragraph1.textContent =
-        "Step into comfort, style, and confidence with our premium collection of shoes. We offer a wide range of footwear designed to match your lifestyle — from casual everyday wear to stylish formal shoes.";
+        "Experience comfort, style, and confidence with our distinctive collection. We offer a wide range of footwear designed to suit your lifestyle, combining durability, comfort, and modern designs at affordable prices. Walk in greater comfort, feel better, and look your best—with options ranging from comfortable everyday styles to elegant formal footwear.";
 
 
     const paragraph2 =
         document.createElement("p");
 
     paragraph2.textContent =
-        "Our mission is to provide high-quality shoes that combine durability, comfort, and modern design at affordable prices. Walk better. Feel better. Look better.";
+        "Our mission is to provide a diverse range of high-quality products that meet the highest standards.";
 
 
     // =========================

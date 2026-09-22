@@ -142,9 +142,10 @@ const orderSchema = new mongoose.Schema(
 
             enum: [
                 "Pending",
-                "Paid",
-                "Failed",
-                "Refunded"
+        "Processing",
+        "Paid",
+        "Failed",
+        "Cancelled"
             ],
 
             default: "Pending"
@@ -160,7 +161,23 @@ const orderSchema = new mongoose.Schema(
             ],
 
             default: "COD"
-        }
+        },
+        payment: {
+    transactionId: {
+        type: String,
+        default: null
+    },
+
+    paidAt: {
+        type: Date,
+        default: null
+    },
+
+    failureReason: {
+        type: String,
+        default: null
+    }
+}
     },
 
     {

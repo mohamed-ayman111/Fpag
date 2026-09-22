@@ -20,7 +20,9 @@ toggleButton.addEventListener("click", function () {
 const form = document.forms["passtoggle"];
 
 const passwordInput = document.getElementById("password");
+const confirmpasswordInput = document.getElementById("confirmpassword");
 const toggleButton = document.getElementById("togglePassword");
+const toggleButtonconfirmpassword = document.getElementById("toggleconfirmpassword");
 
 toggleButton.addEventListener("click", function () {
 
@@ -28,6 +30,14 @@ toggleButton.addEventListener("click", function () {
         passwordInput.type = "text";
     } else {
         passwordInput.type = "password";
-    }
+    
+    } });
 
+toggleButtonconfirmpassword.addEventListener("click", function () {
+
+    if (confirmpasswordInput.type === "password") {
+        confirmpasswordInput.type = "text";
+    } else {
+        confirmpasswordInput.type = "password";
+    }
 });
